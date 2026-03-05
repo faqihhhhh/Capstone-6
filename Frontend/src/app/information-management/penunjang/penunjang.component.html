@@ -1,0 +1,346 @@
+<div class="row mb-3 align-items-center justify-content-between">
+  <div class="col-md-auto col-sm-auto">
+    <div class="section-title">
+      <h2>Penunjang</h2>
+    </div>
+  </div>
+  <div class="col-md-auto col-sm-auto">
+    <h4 class="widget-title">
+      <button
+        class="btn btn-success btn-sm m-right-10"
+        (click)="openModal()"
+      >
+        <i class="las la-plus"></i>
+        Tambah Penunjang
+      </button>
+    </h4>
+  </div>
+</div>
+
+<div class="row align-items-end justify-content-center mb-4">
+  <div class="col-md-auto col-sm-auto chart-wrapper">
+    <ngx-charts-bar-vertical
+      [results]="namaSingle"
+      legendTitle="Penunjang"
+      [legendPosition]="'below'"
+      [legend]="true"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabelNama"
+      [yAxisLabel]="yAxisLabelNama"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
+
+<!-- Your Angular Component Template  <button style="white-space: pre" (click)="importExcel()">Import File</button> -->
+<input
+  type="file"
+  (change)="onFileChange($event)"
+/>
+<button
+  class="btn btn-success btn-sm m-right-10"
+  (click)="importExcel()"
+>
+  Import File
+</button>
+
+<button
+  class="btn btn-success btn-sm m-right-10"
+  (click)="exportAsExcelFile()"
+>
+  Export File
+</button>
+<br /><br />
+
+<div class="mat-elevation-z8">
+  <div
+    class="table-container"
+    style="max-width: 100%; overflow-x: auto"
+  >
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+    >
+      <ng-container matColumnDef="nip">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          NIP
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.nip }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nama">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Nama
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.nama }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jenis_penunjang">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Jenis Penunjang
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jenis_penunjang }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nama_kegiatan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Nama Kegiatan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.nama_kegiatan }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deskripsi_kegiatan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Deskripsi Kegiatan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.deskripsi_kegiatan }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tempat_kegiatan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Tempat Kegiatan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.tempat_kegiatan }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tanggal_kegiatan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Tanggal Kegiatan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.tanggal_kegiatan }}
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+  </div>
+
+  <!-- <mat-paginator
+      [length]="dataDosen.totalData"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onPageChange($event)"
+    ></mat-paginator> -->
+</div>
+
+<!-- Modal -->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: display }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Tambah Penunjang</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseHandled()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form>
+          <div class="mb-3">
+            <label
+              for="namaDosenPegawai"
+              class="form-label"
+              >Nama Dosen atau Pegawai</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="namaDosenPegawai"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="nipDosenPegawai"
+              class="form-label"
+              >NIP Dosen atau Pegawai</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nipDosenPegawai"
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenisPenunjang"
+              class="form-label"
+              >Jenis Penunjang</label
+            >
+            <select
+              class="form-control"
+              aria-label="Jenis Penunjang"
+              id="statusKepegawaian"
+            >
+              <option selected>--Pilih penunjang--</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="namaKegiatan"
+              class="form-label"
+              >Nama Kegiatan</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="namaKegiatan"
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="deskripsiKegiatan"
+              class="form-label"
+              >Deskripsi Kegiatan</label
+            >
+            <textarea
+              class="form-control"
+              id="deskripsiKegiatan"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label
+              for="tempatKegiatan"
+              class="form-label"
+              >Tempat Kegiatan</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="tempatKegiatan"
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tanggalKegiatan"
+              class="form-label"
+              >Tanggal Kegiatan</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="tanggalKegiatan"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            (click)="onCloseHandled()"
+          >
+            Close
+          </button>
+        </div> -->
+    </div>
+  </div>
+</div>

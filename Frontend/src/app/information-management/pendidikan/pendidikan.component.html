@@ -1,0 +1,898 @@
+<div class="row mb-3 align-items-center justify-content-between">
+  <div class="col-md-auto col-sm-auto">
+    <div class="section-title">
+      <h2>Pendidikan</h2>
+    </div>
+  </div>
+  <div class="col-md-auto col-sm-auto">
+    <h4 class="widget-title">
+      <button
+        class="btn btn-success btn-sm m-right-10"
+        (click)="openModalAdd()"
+      >
+        <i class="las la-plus"></i>
+        Tambah Pendidikan
+      </button>
+    </h4>
+  </div>
+</div>
+
+<div class="row align-items-end justify-content-center mb-4">
+  <div
+    class="col-md-auto col-sm-auto chart-wrapper"
+    style="max-width: 800px; margin-bottom: 64px"
+  >
+    <ngx-charts-bar-vertical
+      [results]="proyeksiKependidikan"
+      legendTitle="Proyeksi Dosen"
+      [legendPosition]="'below'"
+      [legend]="true"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabelKependidikan"
+      [yAxisLabel]="yAxisLabelKependidikan"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
+
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceKependidikan"
+      matSort
+    >
+      <ng-container matColumnDef="thn_akademik">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Tahun Akademik
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.thnAkademik ? row.thnAkademik : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="semester">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Semester
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.semester ? row.semester : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deskripsi">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Keterangan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.deskripsi ? row.deskripsi : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="thn_masuk">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Tahun Masuk
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.thnMasuk ? row.thnMasuk : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total_registrasi_mhs">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Total Registrasi Mahasiswa
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.totalRegistrasiMhs ? row.totalRegistrasiMhs : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mahasiswa_aktif">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Mahasiswa Aktif
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.jmlhAktif ? row.infoMahsiswa.jmlhAktif : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mahasiswa_lulus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Mahasiswa Lulus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.jmlhLulus ? row.infoMahsiswa.jmlhLulus : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mahasiswa_non_aktif">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Mahasiswa Non-aktif
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.jmlhNonAktif ? row.infoMahsiswa.jmlhNonAktif : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mahasiswa_do">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Mahasiswa Drop Out
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.jmlhDO ? row.infoMahsiswa.jmlhDO : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mahasiswa_undur_diri">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Mahasiswa Undur Diri
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.jmlhUndurDiri ? row.infoMahsiswa.jmlhUndurDiri : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rataan_ipk_total">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Rataan IPK Total
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.rataanIPKTotal ? row.infoMahsiswa.rataanIPKTotal : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jumlah_ipk_dibawah_2">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Mahasiswa IPK dibawah 2
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.jumlahIPKDibawah2 ? row.infoMahsiswa.jumlahIPKDibawah2 : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="masa_studi_dibawah_8">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Masa Studi dibawah 8 Semester
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.masaStudiDibawah8 ? row.infoMahsiswa.masaStudiDibawah8 : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="masa_studi_8_sampai_10">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Masa Studi 8 sampai 10 Semester
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.masaStudi8Sampai10 ? row.infoMahsiswa.masaStudi8Sampai10 : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="masa_studi_diatas_10">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Masa Studi diatas 10 Semester
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.infoMahsiswa?.masaStudiDiatas10 ? row.infoMahsiswa.masaStudiDiatas10 : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ubah">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Ubah
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-warning btn-sm m-right-10"
+            (click)="openModalEdit()"
+          >
+            Ubah
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hapus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Hapus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-danger btn-sm m-right-10"
+            (click)="onClickDelete(row.thnMasukId)"
+          >
+            Hapus
+          </button>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumsKependidikan; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumsKependidikan"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorKependidikan
+    [length]="kependidikans.length"
+    [pageSize]="pageSizeKependidikan"
+    [pageSizeOptions]="pageSizeOptionsKependidikan"
+    (page)="onPageChangeKependidikan($event)"
+  ></mat-paginator>
+  <div class="header-actions my-4">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVDataKependidikan()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- Add Kependidikan -->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayAdd }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Tambah Kependidikan</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalAdd()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formAdd="ngForm"
+          (ngSubmit)="onSubmitAdd(formAdd)"
+        >
+          <div class="mb-3">
+            <label
+              for="thnAkademik"
+              class="form-label"
+              >Tahun Akademik</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="thnAkademik"
+              name="thnAkademik"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="semester"
+              class="form-label"
+              >Semester</label
+            >
+            <select
+              class="form-control"
+              id="semester"
+              name="semester"
+              ngModel
+              required
+            >
+              <option value="">--Semester--</option>
+              <option value="0">Ganjil</option>
+              <option value="1">Genap</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="thnMasuk"
+              class="form-label"
+              >Tahun Masuk</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="thnMasuk"
+              name="thnMasuk"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="totalRegistrasiMhs"
+              class="form-label"
+              >Total Registrasi Mahasiswa</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="totalRegistrasiMhs"
+              name="totalRegistrasiMhs"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhLulus"
+              class="form-label"
+              >Jumlah Mahasiswa Lulus</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhLulus"
+              name="jmlhLulus"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhNonAktif"
+              class="form-label"
+              >Jumlah Mahasiswa Non Aktif</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhNonAktif"
+              name="jmlhNonAktif"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhDO"
+              class="form-label"
+              >Jumlah Mahasiswa DO</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhDO"
+              name="jmlhDO"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhUndurDiri"
+              class="form-label"
+              >Jumlah Mahasiswa Undur Diri</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhUndurDiri"
+              name="jmlhUndurDiri"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="rataanIPKTotal"
+              class="form-label"
+              >Rataan IPK Total</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="rataanIPKTotal"
+              name="rataanIPKTotal"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="masaStudiDibawah8"
+              class="form-label"
+              >Mahasiswa dengan Masa Studi dibawah 8 bulan</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="masaStudiDibawah8"
+              name="masaStudiDibawah8"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="masaStudi8Sampai10"
+              class="form-label"
+              >Mahasiswa dengan Masa Studi antara 8 sampai 10 bulan</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="masaStudi8Sampai10"
+              name="masaStudi8Sampai10"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="masaStudiDiatas10"
+              class="form-label"
+              >Mahasiswa dengan Masa Studi diatas 10 bulan</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="masaStudiDiatas10"
+              name="masaStudiDiatas10"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jumlahIPKDibawah2"
+              class="form-label"
+              >Mahasiswa dengan IPK dibawah 2</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jumlahIPKDibawah2"
+              name="jumlahIPKDibawah2"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jumlhMBKM"
+              class="form-label"
+              >Jumlah MBKM</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jumlhMBKM"
+              name="jumlhMBKM"
+              ngModel
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-default"
+          (click)="onCloseHandled()"
+        >
+          Close
+        </button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- Edit Kependidikan -->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayEdit }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Edit Kependidikan</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalEdit()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formEdit="ngForm"
+          (ngSubmit)="onSubmitEdit(formEdit)"
+        >
+          <div class="mb-3">
+            <label
+              for="thnAkademik"
+              class="form-label"
+              >Tahun Akademik</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="thnAkademik"
+              name="thnAkademik"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="semester"
+              class="form-label"
+              >Semester</label
+            >
+            <select
+              class="form-control"
+              id="semester"
+              name="semester"
+              ngModel
+              required
+            >
+              <option value="">--Semester--</option>
+              <option value="0">Ganjil</option>
+              <option value="1">Genap</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="thnMasuk"
+              class="form-label"
+              >Tahun Masuk</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="thnMasuk"
+              name="thnMasuk"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="totalRegistrasiMhs"
+              class="form-label"
+              >Total Registrasi Mahasiswa</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="totalRegistrasiMhs"
+              name="totalRegistrasiMhs"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhLulus"
+              class="form-label"
+              >Jumlah Mahasiswa Lulus</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhLulus"
+              name="jmlhLulus"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhNonAktif"
+              class="form-label"
+              >Jumlah Mahasiswa Non Aktif</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhNonAktif"
+              name="jmlhNonAktif"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhDO"
+              class="form-label"
+              >Jumlah Mahasiswa DO</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhDO"
+              name="jmlhDO"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jmlhUndurDiri"
+              class="form-label"
+              >Jumlah Mahasiswa Undur Diri</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jmlhUndurDiri"
+              name="jmlhUndurDiri"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="rataanIPKTotal"
+              class="form-label"
+              >Rataan IPK Total</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="rataanIPKTotal"
+              name="rataanIPKTotal"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jumlahIPKDibawah2"
+              class="form-label"
+              >Mahasiswa dengan IPK dibawah 2</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="jumlahIPKDibawah2"
+              name="jumlahIPKDibawah2"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="masaStudiDibawah8"
+              class="form-label"
+              >Mahasiswa dengan Masa Studi dibawah 8 bulan</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="masaStudiDibawah8"
+              name="masaStudiDibawah8"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="masaStudi8Sampai10"
+              class="form-label"
+              >Mahasiswa dengan Masa Studi antara 8 sampai 10 bulan</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="masaStudi8Sampai10"
+              name="masaStudi8Sampai10"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="masaStudiDiatas10"
+              class="form-label"
+              >Mahasiswa dengan Masa Studi diatas 10 bulan</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="masaStudiDiatas10"
+              name="masaStudiDiatas10"
+              ngModel
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

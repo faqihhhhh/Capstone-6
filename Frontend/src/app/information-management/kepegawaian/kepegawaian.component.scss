@@ -1,0 +1,16 @@
+.custom-modal {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.header-actions {
+  float: right; /* Tombol ke sebelah kanan */
+  margin-top: 20px; /* Jarak tombol dengan tabel */
+  margin-bottom: 20px;
+}
+
+button.btn {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak antara ikon dan teks */
+}

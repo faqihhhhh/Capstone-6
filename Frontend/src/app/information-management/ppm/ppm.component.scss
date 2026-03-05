@@ -1,0 +1,34 @@
+.custom-modal {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.chart-wrapper {
+  height: 400px; /* Sesuaikan tinggi */
+  max-height: 400px;
+}
+
+.chart-wrapper {
+  padding: 10px;
+  margin: 0; /* Hilangkan margin jika ada */
+  display: flex; /* Pastikan fleksibilitas */
+  align-items: center; /* Rata tengah */
+  justify-content: center;
+}
+
+.header-actions {
+  float: right; /* Tombol ke sebelah kanan */
+  margin-bottom: 20px; /* Jarak tombol dengan tabel */
+}
+
+button.btn {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak antara ikon dan teks */
+}
+hr {
+  border: none;
+  height: 2px;
+  color: #80808096;
+  background-color: #80808096;
+}

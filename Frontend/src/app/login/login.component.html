@@ -1,0 +1,103 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div
+        class="loading-shade"
+        *ngIf="isLoading"
+      >
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <form
+        [formGroup]="loginFormGroup"
+        (submit)="onLoginSubmit()"
+        class="login100-form validate-form"
+      >
+        <div class="text-center">
+          <img
+            src="assets/images/logo_ipb.png"
+            style="width: 100px; height: 100px"
+          />
+        </div>
+        <span class="login100-form-title p-b-43">
+          {{ 'LOGIN_TO_CONTINUE' | translate }}
+        </span>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label>{{ 'EMAIL' | translate }}</label>
+              <input
+                formControlName="userName"
+                class="form-control"
+                type="text"
+              />
+              <div
+                *ngIf="loginFormGroup.get('userName').touched && loginFormGroup.get('userName').errors"
+                class="k-tooltip-validation"
+              >
+                <div
+                  class="text-danger"
+                  *ngIf="loginFormGroup.get('userName').errors?.required"
+                >
+                  {{ 'EMAIL_IS_REQUIRED' | translate }}
+                </div>
+                <div
+                  class="text-danger"
+                  *ngIf="loginFormGroup.get('userName').errors?.email"
+                >
+                  {{ 'PLEASE_ENTER_VALID_EMAIL' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label>{{ 'PASSWORD' | translate }}</label>
+              <div class="input-group">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  formControlName="password"
+                  class="form-control"
+                />
+                <div class="input-group-append">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="togglePasswordVisibility()"
+                  >
+                    <span *ngIf="showPassword">Hide</span>
+                    <span *ngIf="!showPassword">Show</span>
+                  </button>
+                </div>
+              </div>
+              <div
+                *ngIf="loginFormGroup.get('password').touched && loginFormGroup.get('password').errors?.required"
+                class="k-tooltip-validation"
+              >
+                <div
+                  class="text-danger"
+                  *ngIf="loginFormGroup.get('password').errors?.required"
+                >
+                  {{ 'PASSWORD_IS_REQUIRED' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-6 col-12">
+            <button
+              type="submit"
+              class="btn-main-large"
+              [disabled]="!loginFormGroup.valid"
+            >
+              {{ 'LOGIN' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+      <div
+        class="login100-more"
+        style="background-image: url('/assets/images/login_esl.jpg')"
+      ></div>
+    </div>
+  </div>
+</div>

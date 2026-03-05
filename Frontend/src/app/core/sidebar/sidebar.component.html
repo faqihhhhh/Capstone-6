@@ -1,0 +1,216 @@
+<div class="left-sidenav">
+  <div class="main-menu-inner">
+    <div class="menu-body">
+      <ul class="nav mainmenu">
+        <li class="nav-item dropend">
+          <div class="nav-item-hold">
+            <i class="nav-icon las la-database"></i>
+            <span class="nav-text dropdown-toggle">DMS</span>
+          </div>
+          <ul class="dropdown-menu custom-dropdown-menu-dms">
+            <li
+              *hasClaim="'dashboard_view_dashboard'"
+              class="nav-item"
+              [routerLink]="['/dashboard']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-tachometer-alt"></i>
+                <span class="nav-text">{{ 'DASHBOARD' | translate }}</span>
+              </div>
+            </li>
+            <li
+              class="nav-item"
+              [routerLink]="['/']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-list"></i>
+                <span class="nav-text">{{ 'ASSIGNED_DOCUMENTS' | translate }}</span>
+              </div>
+            </li>
+            <li
+              *hasClaim="'all_documents_view_documents'"
+              class="nav-item"
+              [routerLink]="['/documents']"
+              [routerLinkActive]="['active']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-file-pdf"></i>
+                <span class="nav-text">{{ 'ALL_DOCUMENTS' | translate }}</span>
+              </div>
+            </li>
+            <li
+              *hasClaim="'document_category_view_categories'"
+              class="nav-item"
+              [routerLink]="['/categories']"
+              [routerLinkActive]="['active']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-file-code"></i>
+                <span class="nav-text">{{ 'DOCUMENT_CATEGORIES' | translate }}</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropend">
+          <div class="nav-item-hold">
+            <i class="nav-icon las la-user"></i>
+            <span class="nav-text dropdown-toggle">Information</span>
+          </div>
+          <ul class="dropdown-menu custom-dropdown-menu-user">
+            <li
+              class="nav-item"
+              *hasClaim="'kepegawaian_view_documents'"
+              [routerLink]="['/information-management/kepegawaian']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-university"></i>
+                <span class="nav-text">Kepegawaian</span>
+              </div>
+            </li>
+            <li
+              class="nav-item"
+              *hasClaim="'publikasi_view_documents'"
+              [routerLink]="['/information-management/publikasi']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-scroll"></i>
+                <span class="nav-text">Luaran Publikasi</span>
+              </div>
+            </li>
+            <li
+              class="nav-item"
+              *hasClaim="'ppm_view_documents'"
+              [routerLink]="['/information-management/ppm']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-microscope"></i>
+                <span class="nav-text">Kegiatan PPM</span>
+              </div>
+            </li>
+            <li
+              class="nav-item"
+              *hasClaim="'kemahasiswaan_view_documents'"
+              [routerLink]="['/information-management/kemahasiswaan']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-users"></i>
+                <span class="nav-text">Kemahasiswaan</span>
+              </div>
+            </li>
+            <li
+              class="nav-item"
+              *hasClaim="'kependidikan_view_documents'"
+              [routerLink]="['/information-management/pendidikan']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-graduation-cap"></i>
+                <span class="nav-text">Kependidikan</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropend">
+          <div class="nav-item-hold">
+            <i class="nav-icon las la-user"></i>
+            <span class="nav-text dropdown-toggle">User Config</span>
+          </div>
+          <ul class="dropdown-menu custom-dropdown-menu-user">
+            <li
+              *hasClaim="'role_view_roles'"
+              class="nav-item"
+              [routerLink]="['/roles']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-tasks"></i>
+                <span class="nav-text">{{ 'ROLES' | translate }}</span>
+              </div>
+            </li>
+            <li
+              *hasClaim="'user_view_users'"
+              class="nav-item"
+              [routerLink]="['/users']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-users"></i>
+                <span class="nav-text">{{ 'USERS' | translate }}</span>
+              </div>
+            </li>
+            <li
+              *hasClaim="'user_assign_user_role'"
+              class="nav-item"
+              [routerLink]="['/roles/users']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-id-badge"></i>
+                <span class="nav-text">{{ 'ROLE_USER' | translate }}</span>
+              </div>
+            </li>
+            <li
+              *hasClaim="'login_audit_view_login_audit_logs'"
+              class="nav-item"
+              [routerLink]="['/login-audit']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-th-list"></i>
+                <span class="nav-text">{{ 'LOGIN_AUDITS' | translate }}</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+        <li
+          class="nav-item"
+          *hasClaim="'reminder_view_reminders'"
+          [routerLink]="['/reminders']"
+          [routerLinkActive]="['active', 'shadow']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <div class="nav-item-hold">
+            <i class="nav-icon las la-bell"></i>
+            <span class="nav-text">{{ 'REMINDER' | translate }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

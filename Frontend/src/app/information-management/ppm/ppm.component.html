@@ -1,0 +1,1306 @@
+<div class="row mb-3 align-items-center justify-content-between">
+  <!-- Judul/Title di Header-->
+  <div class="col-md-auto col-sm-auto">
+    <div class="section-title">
+      <h2>Kegiatan Penelitian dan Pengabdian (PPM)</h2>
+    </div>
+  </div>
+</div>
+<!-- Grafik Bar Charts-->
+<h4 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 16px">
+  Grafik Jumlah PPM (5 Tahun Terakhir)
+</h4>
+<!-- Grafik Bar Charts Bersebelahan -->
+<div class="row d-flex align-items-center">
+  <!-- Grafik Penelitian -->
+  <div class="col-md-6 col-sm-12 chart-wrapper">
+    <ngx-charts-bar-vertical
+      *ngIf="simpleChartData && simpleChartData.length > 0"
+      [results]="simpleChartData"
+      [legend]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Informasi Penelitian'"
+      [yAxisLabel]="'Jumlah'"
+      [barPadding]="10"
+      [scheme]="colorScheme"
+      [animations]="true"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+
+  <!-- Grafik Pengabdian -->
+  <div class="col-md-6 col-sm-12 chart-wrapper">
+    <ngx-charts-bar-vertical
+      *ngIf="simpleChartData2 && simpleChartData2.length > 0"
+      [results]="simpleChartData2"
+      [legend]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Informasi Pengabdian'"
+      [yAxisLabel]="'Jumlah'"
+      [barPadding]="10"
+      [scheme]="colorScheme"
+      [animations]="true"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
+<!--
+    <div>
+
+        <pre>{{ mitrapenelitis | json }}</pre>
+        <pre>{{ penelitianChartData | json }}</pre>
+    </div>
+    -->
+<!-- Triger untuk openModalAdd : framework untuk membangun antarmuka pengguna (Berupa FORM)-->
+<hr />
+<!-- Tabel Kegiatan PPM -->
+<div class="row mb-3 align-items-center justify-content-between">
+  <div class="col-md-auto col-sm-auto">
+    <h3 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 20px">Kegiatan PPM</h3>
+  </div>
+  <div class="col-md-auto col-sm-auto">
+    <h4 class="widget-title">
+      <button
+        class="btn btn-success btn-sm m-right-10"
+        (click)="openModalAdd()"
+      >
+        <i class="las la-plus"></i>
+        Tambah PPM
+      </button>
+    </h4>
+  </div>
+</div>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceKegiatanPPM"
+      matSort
+    >
+      <ng-container matColumnDef="judulPPM">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Judul PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.judulPPM }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tahunMulai">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Tahun Mulai
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.tahunMulai }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tahunSelesai">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Tahun Selesai
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.tahunSelesai }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jenisPPM">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Jenis PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jenisPPM }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mitraPPM">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Mitra PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.mitraPPM }}
+          <!--{{ getKategoriPubsFromInt(row.kategoriPublikasi) }} -->
+        </td>
+      </ng-container>
+
+      <!--
+                <ng-container matColumnDef="nomorKontrak">
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    style="white-space: nowrap; min-width: 160px"
+                  >
+                    Nomor Kontrak
+                  </th>
+                  <td
+                    mat-cell
+                    *matCellDef="let row"
+                    style="white-space: nowrap; min-width: 160px; text-align: center"
+                  >
+                    {{ row.nomorKontrak }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="danaPPM">
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    style="white-space: nowrap; min-width: 160px"
+                  >
+                    Dana PPM
+                  </th>
+                  <td
+                    mat-cell
+                    *matCellDef="let row"
+                    style="white-space: nowrap; min-width: 160px; text-align: center"
+                  >
+                    {{ row.danaPPM }}
+                  </td>
+                </ng-container>
+                -->
+
+      <ng-container matColumnDef="assignDosen">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          PPM Dosen
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          <button
+            class="btn btn-primary btn-sm m-right-10"
+            (click)="openModalRelasi(row.kegiatanID)"
+          >
+            Tambah
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ubah">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Ubah
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          <button
+            class="btn btn-warning btn-sm m-right-10"
+            (click)="openModalEdit(row.kegiatanID)"
+          >
+            Ubah
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hapus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Hapus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          <button
+            class="btn btn-danger btn-sm m-right-10"
+            (click)="deleteKegiatanPPM(row.kegiatanID)"
+          >
+            Hapus
+          </button>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsKegiatanPpm; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsKegiatanPpm"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorKegiatanPpm
+    [length]="kegiatanppms.length"
+    [pageSize]="pageSizeKegiatanPpm"
+    [pageSizeOptions]="pageSizeOptionsKegiatanPpm"
+    (page)="onPageChangeKegiatanPpm($event)"
+  ></mat-paginator>
+</div>
+
+<!-- Tabel Dosen dan Kegiatan PPM-->
+<h3 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 20px">
+  Kegiatan PPM Dosen
+</h3>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourcePegawaiPPM"
+      matSort
+    >
+      <ng-container matColumnDef="namaPegawai">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Nama Dosen
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.namaPegawai }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nip">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          NIP Dosen
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.nip }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="jenisDosen">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Jenis Dosen
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jenisDosen }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="judulPPM">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Judul PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.judulPPM }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tahunMulai">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Tahun Mulai
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.tahunMulai }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tahunSelesai">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Tahun Selesai
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.tahunSelesai }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jenisPPM">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Jenis PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jenisPPM }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mitraPPM">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Mitra PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.mitraPPM }}
+          <!--{{ getKategoriPubsFromInt(row.kategoriPublikasi) }} -->
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nomorKontrak">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Nomor Kontrak
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.nomorKontrak }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="danaPPM">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Dana PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.danaPPM }}
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsPegawaiPpm; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsPegawaiPpm"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorPegawaiPpm
+    [length]="pegawaippms.length"
+    [pageSize]="pageSizePegawaiPpm"
+    [pageSizeOptions]="pageSizeOptionsPegawaiPpm"
+    (page)="onPageChangePegawaiPpm($event)"
+  ></mat-paginator>
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVPpm()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</div>
+
+<!-- Tabel Ringkasan Kegiatan Penelitian Dosen dalam 5 tahun Terakhir-->
+<h3 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 20px">
+  Ringkasan Kegiatan Penelitian Dosen (5 tahun Terakhir)
+</h3>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceRingkasanPPM"
+      matSort
+    >
+      <ng-container matColumnDef="namaPegawai">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Nama Dosen
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.namaPegawai }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nip">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          NIP Dosen
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.nip }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="jenisDosen">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Jenis Dosen
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jenisDosen }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="jumlahPenelitian">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Jumlah Penelitian
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jumlahPenelitian }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jumlahPengabdian">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Jumlah Pengabdian
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.jumlahPengabdian }}
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsRingkasanPPM; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsRingkasanPPM"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorRingkatanPpm
+    [length]="ringkasans.length"
+    [pageSize]="pageSizeRingkasanPpm"
+    [pageSizeOptions]="pageSizeOptionsRingkasanPpm"
+    (page)="onPageChangeRingkasanPpm($event)"
+  ></mat-paginator>
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVRingkasanPpm()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</div>
+
+<!-- Tabel Mitra Peneitian dalam 5 tahun Terakhir-->
+<h3 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 20px">
+  Mitra Penelitian (5 tahun Terakhir)
+</h3>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceMitraPenelitian"
+      matSort
+    >
+      <ng-container matColumnDef="Tahun">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Tahun Kegiatan PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.tahun }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="JumlahMitraPemerintah">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Pemerintah
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jumlahMitraPemerintah }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="JumlahMitraSwasta">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Swasta
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jumlahMitraSwasta }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="JumlahMitraLuarNegeri">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Luar Negeri
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jumlahMitraLuarNegeri }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="TotalDana">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Total Dana PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.totalDana }}
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsMitraPenelitian; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsMitraPenelitian"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorMitraPenelitian
+    [length]="mitrapenelitis.length"
+    [pageSize]="pageSizeMitraPenelitian"
+    [pageSizeOptions]="pageSizeOptionsMitraPenelitian"
+    (page)="onPageChangeMitraPenelitian($event)"
+  ></mat-paginator>
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVMitraPenelitian()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</div>
+
+<!-- Tabel Mitra Pengabdian dalam 5 tahun Terakhir-->
+<h3 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 20px">
+  Mitra Pengabdian (5 tahun Terakhir)
+</h3>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceMitraPengabdian"
+      matSort
+    >
+      <ng-container matColumnDef="Tahun">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Tahun Kegiatan PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.tahun }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="JumlahMitraPemerintah">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Pemerintah
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jumlahMitraPemerintah }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="JumlahMitraSwasta">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Swasta
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jumlahMitraSwasta }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="JumlahMitraLuarNegeri">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px"
+        >
+          Luar Negeri
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px"
+        >
+          {{ row.jumlahMitraLuarNegeri }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="TotalDana">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Total Dana PPM
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.totalDana }}
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsMitraPengabdian; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsMitraPengabdian"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorMitraPengabdian
+    [length]="mitrapengabdis.length"
+    [pageSize]="pageSizeMitraPengabdian"
+    [pageSizeOptions]="pageSizeOptionsMitraPengabdian"
+    (page)="onPageChangeMitraPengabdian($event)"
+  ></mat-paginator>
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVMitraPengabdian()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</div>
+
+<!--openModal untuk CREATE/POST Tambah Kegiatan PPM-->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayAdd }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Tambah Kegiatan PPM</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalAdd()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formAdd="ngForm"
+          (ngSubmit)="onSubmitAddPpm(formAdd)"
+        >
+          <div class="mb-3">
+            <label
+              for="judulPPM"
+              class="form-label"
+              >Judul Kegiatan Penelitian/Pengabdian</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="judulPPM"
+              name="judulPPM"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tahunMulai"
+              class="form-label"
+              >Tahun Mulai PPM</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="tahunMulai"
+              name="tahunMulai"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tahunSelesai"
+              class="form-label"
+              >Tahun Selesai PPM</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="tahunSelesai"
+              name="tahunSelesai"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenisPPM"
+              class="form-label"
+              >Jenis Kegiatan PPM</label
+            >
+            <select
+              class="form-control"
+              id="jenisPPM"
+              name="jenisPPM"
+              ngModel
+              required
+            >
+              <option value="">--Kategori PPM--</option>
+              <option value="0">Penelitian</option>
+              <option value="1">Pengabdian</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="mitraPPM"
+              class="form-label"
+              >Mitra Penelitian/Pengabdian</label
+            >
+            <select
+              class="form-control"
+              id="mitraPPM"
+              name="mitraPPM"
+              ngModel
+              required
+            >
+              <option value="">--Mitra PPM--</option>
+              <option value="0">Non-Mitra</option>
+              <option value="1">Pemerintah</option>
+              <option value="2">Swasta</option>
+              <option value="3">Luar Negeri</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomorKontrak"
+              class="form-label"
+              >Nomor Kontrak Penelitian/Pengabdian</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomorKontrak"
+              name="nomorKontrak"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="danaPPM"
+              class="form-label"
+              >Dana Kegiatan PPM</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="danaPPM"
+              name="danaPPM"
+              ngModel
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--openModal untuk EDIT/PUT Kegiatan PPM-->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayEdit }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Ubah Publikasi</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalEdit()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formEdit="ngForm"
+          (ngSubmit)="onSubmitEditPpm(formEdit)"
+        >
+          <div class="mb-3">
+            <label
+              for="judulPPM_edit"
+              class="form-label"
+              >Judul Kegiatan Penelitian/Pengabdian</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="judulPPM_edit"
+              name="judulPPM_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tahunMulai_edit"
+              class="form-label"
+              >Tahun Mulai PPM</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="tahunMulai_edit"
+              name="tahunMulai_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tahunSelesai_edit"
+              class="form-label"
+              >Tahun Selesai PPM</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="tahunSelesai_edit"
+              name="tahunSelesai_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenisPPM_edit"
+              class="form-label"
+              >Jenis Kegiatan PPM</label
+            >
+            <select
+              class="form-control"
+              id="jenisPPM_edit"
+              name="jenisPPM_edit"
+              ngModel
+              required
+            >
+              <option value="">--Kategori PPM--</option>
+              <option value="0">Penelitian</option>
+              <option value="1">Pengabdian</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="mitraPPM_edit"
+              class="form-label"
+              >Mitra Penelitian/Pengabdian</label
+            >
+            <select
+              class="form-control"
+              id="mitraPPM_edit"
+              name="mitraPPM_edit"
+              ngModel
+              required
+            >
+              <option value="">--Mitra PPM--</option>
+              <option value="0">Non-Mitra</option>
+              <option value="1">Pemerintah</option>
+              <option value="2">Swasta</option>
+              <option value="3">Luar Negeri</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomorKontrak_edit"
+              class="form-label"
+              >Nomor Kontrak Penelitian/Pengabdian</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomorKontrak_edit"
+              name="nomorKontrak_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="danaPPM_edit"
+              class="form-label"
+              >Dana Kegiatan PPM</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="danaPPM_edit"
+              name="danaPPM_edit"
+              ngModel
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--openModal untuk CREATE/POST Tambah Relasi Dosen-PPM-->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayRelasi }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Tambahkan Dosen ke PPM</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalRelasi()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formRelasi="ngForm"
+          (ngSubmit)="onSubmitRelasiPpm(formRelasi)"
+        >
+          <!--
+                        <div class="mb-3">
+                          <label
+                          for="ppm"
+                          class="form-label">Judul Penelitian/Pengabdian</label>
+                          <select
+                            class="form-select"
+                            id="ppm"
+                            [(ngModel)]="selectedkegiatanPPMId"
+                            name="ppm"
+                            required
+                          >
+                            <option value="" disabled selected>Pilih Judul PPM</option>
+                            <option *ngFor="let ppm of ppmSummary" [value]="ppm.kegiatanId">
+                              {{ ppm.judulPPM }} - ({{ ppm.tahunMulai }})
+                            </option>
+                          </select>
+                        </div>
+                        -->
+          <div class="mb-3">
+            <label
+              for="dosen"
+              class="form-label"
+              >Nama Dosen</label
+            >
+            <select
+              class="form-select"
+              id="dosen"
+              [(ngModel)]="selectedDosenId"
+              name="dosen"
+              required
+            >
+              <option
+                value=""
+                disabled
+                selected
+              >
+                Pilih Dosen
+              </option>
+              <option
+                *ngFor="let dosen of dosenSummary"
+                [value]="dosen.id"
+              >
+                {{ dosen.nip }} - ({{ dosen.nama }})
+              </option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

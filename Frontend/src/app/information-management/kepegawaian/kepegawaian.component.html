@@ -1,0 +1,1726 @@
+<div class="row mb-3 align-items-center justify-content-between">
+  <div class="col-md-auto col-sm-auto">
+    <div class="section-title">
+      <h2>Kepegawaian</h2>
+    </div>
+  </div>
+  <div class="col-md-auto col-sm-auto">
+    <h4 class="widget-title">
+      <button
+        class="btn btn-success btn-sm m-right-10"
+        (click)="openModalAdd()"
+      >
+        <i class="las la-plus"></i>
+        Tambah Pegawai
+      </button>
+    </h4>
+  </div>
+</div>
+
+<div class="row align-items-end justify-content-center mb-4">
+  <div class="col-md-auto col-sm-auto chart-wrapper">
+    <ngx-charts-bar-vertical
+      [results]="proyeksiDosen"
+      legendTitle="Proyeksi Dosen"
+      [legendPosition]="'below'"
+      [legend]="true"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabelDosen"
+      [yAxisLabel]="yAxisLabelDosen"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+  <div class="col-md-auto col-sm-auto chart-wrapper">
+    <ngx-charts-bar-vertical
+      [results]="proyeksiTendik"
+      legendTitle="Proyeksi Tendik"
+      [legendPosition]="'below'"
+      [legend]="true"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabelTendik"
+      [yAxisLabel]="yAxisLabelTendik"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
+
+<!-- Tabel Dosen -->
+<h3
+  style="
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    font-size: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  "
+>
+  Daftar Dosen
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVDataDosen()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</h3>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceDosen"
+      matSort
+    >
+      <ng-container matColumnDef="nip">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          NIP
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nip }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nama">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Nama
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nama }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status_kepegawaian">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Status Kepegawaian
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ addSpaceBeforeUppercase(getStatusDosenFromInt(row.jenis_Dosen)) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tempat_lahir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Tempat Lahir
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.tempat_Lahir }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tanggal_lahir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Tanggal Lahir
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ formatDate(row.tanggal_Lahir) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jenis_kelamin">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jenis Kelamin
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ getGenderFromInt(row.jenis_Kelamin) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="alamat">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Alamat
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.alamat }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="telp_darurat">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Telp Darurat
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.telepon_Darurat }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pendidikan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Pendidikan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ getStudiFromInt(row.pendidikan_Terakhir) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status_pernikahan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Status Pernikahan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ getNikahFromInt(row.status_Pernikahan) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nidn">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          NIDN
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.jenis_Dosen === 0 || row.jenis_Dosen === 1 ? row?.dosenTetap?.nidn : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="no_serdos">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          No Serdos
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.jenis_Dosen === 0 || row.jenis_Dosen === 1 ? row?.dosenTetap?.nomor_Serdos : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="gol_terakhir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Golongan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.jenis_Dosen === 0 || row.jenis_Dosen === 1 ? row?.dosenTetap?.golongan : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jab_fungsi_terakhir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jabatan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{
+            row.jenis_Dosen === 0 || row.jenis_Dosen === 1
+              ? addSpaceBeforeUppercase(getJabatanDosenTetapFromInt(row?.dosenTetap?.jabatan_Akademik))
+              : '-'
+          }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="no_bpjs">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          BPJS
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nomor_BPJS }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="no_npwp">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          NPWP
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nomor_NPWP }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="no_paspor">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Paspor
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nomor_Paspor === '0' ? '-' : row.nomor_Paspor }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ubah">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Ubah
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-warning btn-sm m-right-10"
+            (click)="openModalEdit(row.id)"
+          >
+            Ubah
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hapus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Hapus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-danger btn-sm m-right-10"
+            (click)="deletePegawai(row.nama, row.id)"
+          >
+            Hapus
+          </button>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsDosen; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsDosen"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorDosen
+    [length]="dosens.length"
+    [pageSize]="pageSizeDosen"
+    [pageSizeOptions]="pageSizeOptionsDosen"
+    (page)="onPageChangeDosen($event)"
+  ></mat-paginator>
+</div>
+
+<!-- Tabel tendik -->
+<h3
+  style="
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    font-size: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  "
+>
+  Daftar Tenaga Pendidik
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVDataTendik()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</h3>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 16px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceTendik"
+      matSort
+    >
+      <ng-container matColumnDef="nip">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          NIP
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nip }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nama">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Nama
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nama }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status_kepegawaian">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Status Kepegawaian
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ addSpaceBeforeUppercase(getStatusTendikFromInt(row.jenis_Tendik)) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tempat_lahir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Tempat Lahir
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.tempat_Lahir }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tanggal_lahir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Tanggal Lahir
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ formatDate(row.tanggal_Lahir) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jenis_kelamin">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jenis Kelamin
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ getGenderFromInt(row.jenis_Kelamin) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="alamat">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Alamat
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.alamat }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="telp_darurat">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Telp Darurat
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.telepon_Darurat }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pendidikan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Pendidikan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ getStudiFromInt(row.pendidikan_Terakhir) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status_pernikahan">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Status Pernikahan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ getNikahFromInt(row.status_Pernikahan) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="gol_terakhir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Golongan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.jenis_Tendik === 0 ? row?.tendikTetap?.golongan : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="jab_fungsi_terakhir">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jabatan
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.jenis_Tendik === 0 ? row?.tendikTetap?.jabatan : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="no_bpjs">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          BPJS
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nomor_BPJS }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="no_npwp">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          NPWP
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nomor_NPWP }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="no_paspor">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Paspor
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nomor_Paspor === '0' ? '-' : row.nomor_Paspor }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ubah">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Ubah
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-warning btn-sm m-right-10"
+            (click)="openModalEdit(row.id)"
+          >
+            Ubah
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hapus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Hapus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-danger btn-sm m-right-10"
+            (click)="deletePegawai(row.nama, row.id)"
+          >
+            Hapus
+          </button>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsTendik; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsTendik"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorTendik
+    [length]="tendiks.length"
+    [pageSize]="pageSizeTendik"
+    [pageSizeOptions]="pageSizeOptionsTendik"
+    (page)="onPageChangeTendik($event)"
+  ></mat-paginator>
+</div>
+
+<!-- Modal Add-->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayAdd }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Tambah Pegawai</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalAdd()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formAdd="ngForm"
+          (ngSubmit)="onSubmitAdd(formAdd)"
+        >
+          <div class="mb-3">
+            <label
+              for="nip"
+              class="form-label"
+              >NIP Dosen atau Pegawai</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nip"
+              name="nip"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="nama"
+              class="form-label"
+              >Nama Dosen atau Tendik</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nama"
+              name="nama"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tanggal_Lahir"
+              class="form-label"
+              >Tanggal Lahir</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="tanggal_Lahir"
+              name="tanggal_Lahir"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tempat_Lahir"
+              class="form-label"
+              >Tempat Lahir</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="tempat_Lahir"
+              name="tempat_Lahir"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenis_Kelamin"
+              class="form-label"
+              >Jenis Kelamin</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Kelamin"
+              name="jenis_Kelamin"
+              ngModel
+              required
+            >
+              <option value="">--Jenis kelamin--</option>
+              <option value="0">Pria</option>
+              <option value="1">Perempuan</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="alamat"
+              class="form-label"
+              >Alamat</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="alamat"
+              name="alamat"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="telepon_Darurat"
+              class="form-label"
+              >Nomor Telepon Darurat</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="telepon_Darurat"
+              name="telepon_Darurat"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="pendidikan_Terakhir"
+              class="form-label"
+              >Pendidikan Terakhir</label
+            >
+            <select
+              class="form-control"
+              id="pendidikan_Terakhir"
+              name="pendidikan_Terakhir"
+              ngModel
+              required
+            >
+              <option value="">--Jenjang studi--</option>
+              <option value="0">SMA</option>
+              <option value="1">D3</option>
+              <option value="2">D4</option>
+              <option value="3">S1</option>
+              <option value="4">S2</option>
+              <option value="5">S3</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="gelar"
+              class="form-label"
+              >Gelar</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="gelar"
+              name="gelar"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="status_Pernikahan"
+              class="form-label"
+              >Status Pernikahan</label
+            >
+            <select
+              class="form-control"
+              id="status_Pernikahan"
+              name="status_Pernikahan"
+              ngModel
+              required
+            >
+              <option value="">--Status pernikahan--</option>
+              <option value="0">Menikah</option>
+              <option value="1">Lajang</option>
+              <option value="2">Duda</option>
+              <option value="3">Janda</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomor_BPJS"
+              class="form-label"
+              >Nomor BPJS</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomor_BPJS"
+              name="nomor_BPJS"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomor_NPWP"
+              class="form-label"
+              >Nomor NPWP</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomor_NPWP"
+              name="nomor_NPWP"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomor_Paspor"
+              class="form-label"
+              >Nomor Paspor</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomor_Paspor"
+              name="nomor_Paspor"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenis_Pegawai"
+              class="form-label"
+              >Jenis Pegawai</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Pegawai"
+              name="jenis_Pegawai"
+              [(ngModel)]="jenisPegawai"
+              required
+              required
+            >
+              <option value="">--Jenis pegawai--</option>
+              <option value="0">Dosen</option>
+              <option value="1">Tendik</option>
+            </select>
+          </div>
+          <!-- Only show if jenis pegawai is Dosen or value 0 -->
+          <div
+            class="mb-3"
+            *ngIf="jenisPegawai === '0'"
+          >
+            <label
+              for="jenis_Dosen"
+              class="form-label"
+              >Jenis Dosen</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Dosen"
+              name="jenis_Dosen"
+              [(ngModel)]="jenisDosen"
+              required
+              required
+            >
+              <option value="">--Jenis dosen--</option>
+              <option value="0">PNS</option>
+              <option value="1">Tetap Non PNS</option>
+              <option value="2">Kontrak</option>
+            </select>
+          </div>
+          <!-- Only show if jenis dosen is PNS or value 0 -->
+          <span *ngIf="jenisPegawai === '0' && (jenisDosen === '0' || jenisDosen === '1')">
+            <div class="mb-3">
+              <label
+                for="nidn"
+                class="form-label"
+                >NIDN</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nidn"
+                name="nidn"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="jabatan_Akademik"
+                class="form-label"
+                >Jabatan Akademik</label
+              >
+              <select
+                class="form-control"
+                id="jabatan_Akademik"
+                name="jabatan_Akademik"
+                ngModel
+                required
+              >
+                <option value="">--Jenjang studi--</option>
+                <option value="0">CalonDosen</option>
+                <option value="1">Asisten Ahli</option>
+                <option value="2">Lektor</option>
+                <option value="3">Lektor Kepala</option>
+                <option value="4">Profesor</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label
+                for="golongan"
+                class="form-label"
+                >Golongan</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="golongan"
+                name="golongan"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="tmt"
+                class="form-label"
+                >TMT</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="tmt"
+                name="tmt"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="nomor_Serdos"
+                class="form-label"
+                >Nomor Sertifikat Dosen</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nomor_Serdos"
+                name="nomor_Serdos"
+                ngModel
+              />
+            </div>
+          </span>
+
+          <!-- Only show if jenis pegawai is tendik or value 1 -->
+          <div
+            class="mb-3"
+            *ngIf="jenisPegawai === '1'"
+          >
+            <label
+              for="jenis_Tendik"
+              class="form-label"
+              >Jenis Tendik</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Tendik"
+              name="jenis_Tendik"
+              [(ngModel)]="jenisTendik"
+              required
+            >
+              <option value="">--Jenis tendik--</option>
+              <option value="0">PNS</option>
+              <option value="1">Kontrak</option>
+            </select>
+          </div>
+          <!-- Only show if jenis tendik is PNS or value 0 -->
+          <span *ngIf="jenisPegawai === '1' && jenisTendik === '0'">
+            <div class="mb-3">
+              <label
+                for="jabatan"
+                class="form-label"
+                >Jabatan</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="jabatan"
+                name="jabatan"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="golongan_Tendik"
+                class="form-label"
+                >Golongan Tendik</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="golongan_Tendik"
+                name="golongan_Tendik"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="tmt_Tendik"
+                class="form-label"
+                >TMT Tendik</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="tmt_Tendik"
+                name="tmt_Tendik"
+                ngModel
+                required
+              />
+            </div>
+          </span>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit -->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayEdit }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Ubah Pegawai</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalEdit()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formEdit="ngForm"
+          (ngSubmit)="onSubmitEdit(formEdit)"
+        >
+          <div class="mb-3">
+            <label
+              for="nip_edit"
+              class="form-label"
+              >NIP Dosen atau Pegawai</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nip_edit"
+              name="nip_edit"
+              [(ngModel)]="employee.nip"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="nama_edit"
+              class="form-label"
+              >Nama Dosen atau Tendik</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nama_edit"
+              name="nama_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tanggal_Lahir_edit"
+              class="form-label"
+              >Tanggal Lahir</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="tanggal_Lahir_edit"
+              name="tanggal_Lahir_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="tempat_Lahir_edit"
+              class="form-label"
+              >Tempat Lahir</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="tempat_Lahir_edit"
+              name="tempat_Lahir_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenis_Kelamin_edit"
+              class="form-label"
+              >Jenis Kelamin</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Kelamin_edit"
+              name="jenis_Kelamin_edit"
+              ngModel
+              required
+            >
+              <option value="">--Jenis kelamin--</option>
+              <option value="0">Pria</option>
+              <option value="1">Perempuan</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="alamat_edit"
+              class="form-label"
+              >Alamat</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="alamat_edit"
+              name="alamat_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="telepon_Darurat_edit"
+              class="form-label"
+              >Nomor Telepon Darurat</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="telepon_Darurat_edit"
+              name="telepon_Darurat_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="pendidikan_Terakhir_edit"
+              class="form-label"
+              >Pendidikan Terakhir</label
+            >
+            <select
+              class="form-control"
+              id="pendidikan_Terakhir_edit"
+              name="pendidikan_Terakhir_edit"
+              ngModel
+              required
+            >
+              <option value="">--Jenjang studi--</option>
+              <option value="0">D3</option>
+              <option value="1">D4</option>
+              <option value="2">S1</option>
+              <option value="3">S2</option>
+              <option value="4">S3</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="gelar_edit"
+              class="form-label"
+              >Gelar</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="gelar_edit"
+              name="gelar_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="status_Pernikahan_edit"
+              class="form-label"
+              >Status Pernikahan</label
+            >
+            <select
+              class="form-control"
+              id="status_Pernikahan_edit"
+              name="status_Pernikahan_edit"
+              ngModel
+              required
+            >
+              <option value="">--Status pernikahan--</option>
+              <option value="0">Menikah</option>
+              <option value="1">Lajang</option>
+              <option value="2">Duda</option>
+              <option value="3">Janda</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomor_BPJS_edit"
+              class="form-label"
+              >Nomor BPJS</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomor_BPJS_edit"
+              name="nomor_BPJS_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomor_NPWP_edit"
+              class="form-label"
+              >Nomor NPWP</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomor_NPWP_edit"
+              name="nomor_NPWP_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="nomor_Paspor_edit"
+              class="form-label"
+              >Nomor Paspor</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomor_Paspor_edit"
+              name="nomor_Paspor_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="jenis_Pegawai_edit"
+              class="form-label"
+              >Jenis Pegawai</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Pegawai_edit"
+              name="jenis_Pegawai_edit"
+              [(ngModel)]="jenisPegawai"
+              required
+              required
+            >
+              <option value="">--Jenis pegawai--</option>
+              <option value="0">Dosen</option>
+              <option value="1">Tendik</option>
+            </select>
+          </div>
+          <!-- Only show if jenis pegawai is Dosen or value 0 -->
+          <div
+            class="mb-3"
+            *ngIf="jenisPegawai === '0'"
+          >
+            <label
+              for="jenis_Dosen_edit"
+              class="form-label"
+              >Jenis Dosen</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Dosen_edit"
+              name="jenis_Dosen_edit"
+              [(ngModel)]="jenisDosen"
+              required
+              required
+            >
+              <option value="">--Jenis dosen--</option>
+              <option value="0">PNS</option>
+              <option value="1">Tetap Non PNS</option>
+              <option value="2">Kontrak</option>
+            </select>
+          </div>
+          <!-- Only show if jenis dosen is PNS or value 0 -->
+          <span *ngIf="jenisPegawai === '0' && jenisDosen === '0'">
+            <div class="mb-3">
+              <label
+                for="nidn_edit"
+                class="form-label"
+                >NIDN</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nidn_edit"
+                name="nidn_edit"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="jabatan_Akademik_edit"
+                class="form-label"
+                >Jabatan Akademik</label
+              >
+              <select
+                class="form-control"
+                id="jabatan_Akademik_edit"
+                name="jabatan_Akademik_edit"
+                ngModel
+                required
+              >
+                <option value="">--Jenjang studi--</option>
+                <option value="0">Asisten Ahli</option>
+                <option value="1">Lektor</option>
+                <option value="2">Lektor Kepala</option>
+                <option value="3">Profesor</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label
+                for="golongan_edit"
+                class="form-label"
+                >Golongan</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="golongan_edit"
+                name="golongan_edit"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="tmt_edit"
+                class="form-label"
+                >TMT</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="tmt_edit"
+                name="tmt_edit"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="nomor_Serdos_edit"
+                class="form-label"
+                >Nomor Sertifikat Dosen</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nomor_Serdos_edit"
+                name="nomor_Serdos_edit"
+                ngModel
+                required
+              />
+            </div>
+          </span>
+
+          <!-- Only show if jenis pegawai is tendik or value 1 -->
+          <div
+            class="mb-3"
+            *ngIf="jenisPegawai === '1'"
+          >
+            <label
+              for="jenis_Tendik_edit"
+              class="form-label"
+              >Jenis Tendik</label
+            >
+            <select
+              class="form-control"
+              id="jenis_Tendik_edit"
+              name="jenis_Tendik_edit"
+              [(ngModel)]="jenisTendik"
+              required
+            >
+              <option value="">--Jenis tendik--</option>
+              <option value="0">PNS</option>
+              <option value="1">Kontrak</option>
+            </select>
+          </div>
+          <!-- Only show if jenis tendik is PNS or value 0 -->
+          <span *ngIf="jenisPegawai === '1' && jenisTendik === '0'">
+            <div class="mb-3">
+              <label
+                for="jabatan_edit"
+                class="form-label"
+                >Jabatan</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="jabatan_edit"
+                name="jabatan_edit"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="golongan_Tendik_edit"
+                class="form-label"
+                >Golongan Tendik</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="golongan_Tendik_edit"
+                name="golongan_Tendik_edit"
+                ngModel
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="tmt_Tendik_edit"
+                class="form-label"
+                >TMT Tendik</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="tmt_Tendik_edit"
+                name="tmt_Tendik_edit"
+                ngModel
+                required
+              />
+            </div>
+          </span>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

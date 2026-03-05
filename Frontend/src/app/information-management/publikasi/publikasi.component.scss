@@ -1,0 +1,21 @@
+.custom-modal {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.chart-wrapper {
+  width: 100%;
+  height: 400px; /* Pastikan tinggi grafik memadai */
+  display: block;
+}
+
+.header-actions {
+  float: right; /* Tombol ke sebelah kanan */
+  margin-bottom: 20px; /* Jarak tombol dengan tabel */
+}
+
+button.btn {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak antara ikon dan teks */
+}

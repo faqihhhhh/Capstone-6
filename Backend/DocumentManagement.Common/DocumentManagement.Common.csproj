@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\DocumentManagement.Data\DocumentManagement.Data.csproj" />
+	</ItemGroup>
+</Project>

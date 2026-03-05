@@ -1,0 +1,664 @@
+<div class="row mb-3 align-items-center justify-content-between">
+  <!-- Judul/Title di Header-->
+  <div class="col-md-auto col-sm-auto">
+    <div class="section-title">
+      <h2>Publikasi</h2>
+    </div>
+  </div>
+</div>
+<h4 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 15px">
+  Grafik Jumlah Publikasi (5 Tahun Terakhir)
+</h4>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-sm-12 chart-wrapper">
+    <ngx-charts-bar-vertical
+      *ngIf="simpleChartData && simpleChartData.length > 0"
+      [results]="simpleChartData"
+      [legend]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Kategori Publikasi'"
+      [yAxisLabel]="'Jumlah Publikasi'"
+      [barPadding]="20"
+      [animations]="true"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
+
+<!-- Display tabel untuk representasi Data-->
+<div class="row mb-3 align-items-center justify-content-between">
+  <div class="col-md-auto col-sm-auto">
+    <h3 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 20px">
+      Daftar Luaran Publikasi
+    </h3>
+  </div>
+  <div class="col-md-auto col-sm-auto">
+    <button
+      class="btn btn-success btn-sm m-right-10"
+      (click)="openModalAdd()"
+    >
+      <i class="las la-plus"></i>
+      Tambah Publikasi
+    </button>
+  </div>
+</div>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 24px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourcePublikasi"
+      matSort
+    >
+      <ng-container matColumnDef="nip">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          NIP
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nip }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nama">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Nama
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nama }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tahunPublikasi">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Tahun Publikasi
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ row.tahunPublikasi }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="judulPublikasi">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Judul Publikasi
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.judulPublikasi }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="kategoriPublikasi">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Kategori Publikasi
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.kategoriPublikasi }}
+          <!--{{ getKategoriPubsFromInt(row.kategoriPublikasi) }} -->
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="penerapanMasyarakat">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Penerapan Masyarakat
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          {{ getPenerapanMasyFromInt(row.penerapanMasyarakat) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ubah">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Ubah
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-warning btn-sm m-right-10"
+            (click)="openModalEdit(row.publikasiId)"
+          >
+            Ubah
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hapus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; text-align: center"
+        >
+          Hapus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          <button
+            class="btn btn-danger btn-sm m-right-10"
+            (click)="deletePublikasi(row.publikasiId)"
+          >
+            Hapus
+          </button>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsPublikasi; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsPublikasi"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorPublikasi
+    [length]="publikasis.length"
+    [pageSize]="pageSizePublikasi"
+    [pageSizeOptions]="pageSizeOptionsPublikasi"
+    (page)="onPageChangePublikasi($event)"
+  ></mat-paginator>
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVPublikasi()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</div>
+
+<!-- Tabel Ringkasan Publikasi -->
+<h3 style="font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 8px; font-size: 20px">
+  Ringkasan Publikasi (dalam 5 tahun terakhir)
+</h3>
+<div
+  class="mat-elevation-z8"
+  style="margin-bottom: 16px"
+>
+  <div style="max-width: 100%; overflow-x: auto">
+    <table
+      mat-table
+      [dataSource]="dataSourceRingkasanPublikasi"
+      matSort
+    >
+      <ng-container matColumnDef="nip">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          NIP
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nip }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nama">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Nama
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.nama }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalScopus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jumlah Publikasi Scopus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.totalScopus }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalNonScopus">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jumlah Publikasi Non-Scopus
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.totalNonScopus }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalSinta">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jumlah Publikasi Sinta
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.totalSinta }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalHKI">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jumlah HKI
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.totalHKI }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalPenerapanMasyarakat">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          Jumlah Penerapan Masyarakat
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          style="white-space: nowrap; min-width: 160px; padding-left: 8px; padding-right: 8px"
+        >
+          {{ row.totalPenerapanMasyarakat }}
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumnsRingkasanPublikasi; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsRingkasanPublikasi"
+      ></tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    #paginatorRingkasan
+    [length]="ringkasans.length"
+    [pageSize]="pageSizeRingkasanPublikasi"
+    [pageSizeOptions]="pageSizeOptionsRingkasanPublikasi"
+    (page)="onPageChangeRingkasanPublikasi($event)"
+  ></mat-paginator>
+  <div class="header-actions">
+    <button
+      type="button"
+      class="btn btn-info"
+      (click)="exportToCSVRingkasanPublikasi()"
+    >
+      <mat-icon>download</mat-icon>
+      Ekspor ke CSV
+    </button>
+  </div>
+</div>
+
+<!--Tambah openModal untuk CREATE/POST-->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayAdd }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Tambah Publikasi</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalAdd()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formAdd="ngForm"
+          (ngSubmit)="onSubmitAdd(formAdd)"
+        >
+          <div class="mb-3">
+            <label
+              for="dosen"
+              class="form-label"
+              >Nama Dosen</label
+            >
+            <select
+              class="form-control"
+              id="dosen"
+              [(ngModel)]="selectedDosenId"
+              name="dosen"
+              required
+            >
+              <option
+                value=""
+                disabled
+                selected
+              >
+                Pilih Dosen
+              </option>
+              <option
+                *ngFor="let dosen of dosenSummary"
+                [value]="dosen.id"
+              >
+                {{ dosen.nip }} - ({{ dosen.nama }})
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="tahunPublikasi"
+              class="form-label"
+              >Tahun Publikasi</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="tahunPublikasi"
+              name="tahunPublikasi"
+              ngModel
+              required
+            />
+            <!--
+            <div *ngIf="tahunPublikasi?.errors?.min || tahunPublikasi?.errors?.max">
+              Tahun publikasi harus antara 1990 dan 2100.
+            </div>
+            -->
+          </div>
+          <div class="mb-3">
+            <label
+              for="judulPublikasi"
+              class="form-label"
+              >Judul Publikasi</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="judulPublikasi"
+              name="judulPublikasi"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="kategoriPublikasi"
+              class="form-label"
+              >Kategori Publikasi</label
+            >
+            <select
+              class="form-control"
+              id="kategoriPublikasi"
+              name="kategoriPublikasi"
+              ngModel
+              required
+            >
+              <option value="">--Kategori Publikasi--</option>
+              <option value="0">Scopus</option>
+              <option value="1">Insternational Non-Scopus</option>
+              <option value="2">Sinta</option>
+              <option value="3">HKI</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="penerapanMasyarakat"
+              class="form-label"
+              >Penerapan dalam Masyarakat</label
+            >
+            <select
+              class="form-control"
+              id="penerapanMasyarakat"
+              name="penerapanMasyarakat"
+              ngModel
+              required
+            >
+              <option value="">--Penerapan dalam Masyarakat--</option>
+              <option value="0">Ya</option>
+              <option value="1">Tidak</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tambah openModal untuk EDIT/PUT -->
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayEdit }"
+>
+  <div
+    class="modal-dialog"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Ubah Publikasi</h1>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCloseModalEdit()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom-modal">
+        <form
+          #formEdit="ngForm"
+          (ngSubmit)="onSubmitEdit(formEdit)"
+        >
+          <div class="mb-3">
+            <label
+              for="tahunPublikasi_edit"
+              class="form-label"
+              >Tahun Publikasi</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="tahunPublikasi_edit"
+              name="tahunPublikasi_edit"
+              ngModel
+              required
+            />
+            <!--
+          <div *ngIf="tahunPublikasi?.errors?.min || tahunPublikasi?.errors?.max">
+            Tahun publikasi harus antara 1990 dan 2100.
+          </div>
+          --></div>
+          <div class="mb-3">
+            <label
+              for="judulPublikasi_edit"
+              class="form-label"
+              >Judul Publikasi</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="judulPublikasi_edit"
+              name="judulPublikasi_edit"
+              ngModel
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label
+              for="kategoriPublikasi_edit"
+              class="form-label"
+              >Kategori Publikasi</label
+            >
+            <select
+              class="form-control"
+              id="kategoriPublikasi_edit"
+              name="kategoriPublikasi_edit"
+              ngModel
+              required
+            >
+              <option value="">--Kategori Publikasi--</option>
+              <option value="0">Scopus</option>
+              <option value="1">Insternational Non-Scopus</option>
+              <option value="2">Sinta</option>
+              <option value="3">HKI</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label
+              for="penerapanMasyarakat_edit"
+              class="form-label"
+              >Penerapan dalam Masyarakat</label
+            >
+            <select
+              class="form-control"
+              id="penerapanMasyarakat_edit"
+              name="penerapanMasyarakat_edit"
+              ngModel
+              required
+            >
+              <option value="">--Penerapan dalam Masyarakat--</option>
+              <option value="0">Ya</option>
+              <option value="1">Tidak</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
