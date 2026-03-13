@@ -5,6 +5,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Include="..\DocumentManagement.API\appsettings.json" Link="appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.24" />
 	</ItemGroup>

@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   // apiUrl: 'https://localhost:44313/',
-  apiUrl: 'https://localhost:5001/', // prod
+  apiUrl: 'https://localhost:8081/', // prod
   // apiUrl: 'https://www.ids-esl.site/', // dev
   allowExtesions: [
     {
