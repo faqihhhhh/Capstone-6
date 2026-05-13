@@ -215,7 +215,7 @@ namespace DocumentManagement.API
             app.UseStaticFiles();
 
             app.UseCors("ExposeResponseHeaders");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
