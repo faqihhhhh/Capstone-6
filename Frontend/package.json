@@ -48,7 +48,7 @@
     "ngx-doc-viewer": "^1.4.0",
     "ngx-extended-pdf-viewer": "^7.3.1",
     "ngx-pagination": "^6.0.3",
-    "ngx-toastr": "^13.1.0",
+    "ngx-toastr": "^16.2.0",
     "popper.js": "^1.16.1",
     "prettier": "^3.0.3",
     "rxjs": "~6.6.0",
