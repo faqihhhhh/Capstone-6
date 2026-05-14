@@ -14,16 +14,16 @@ export class DocumentManageResolver  {
     private documentService: DocumentService,
     private router: Router
   ) {}
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<DocumentInfo> | null {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<DocumentInfo | null> {
     const id = route.paramMap.get('id')
     if (id === 'add') {
-      return null
+      return of(null)
     }
     return this.documentService.getDocument(id).pipe(
       take(1),
       mergeMap((documentInfo) => {
-        if (documentInfo) {
-          return of(documentInfo)
+        if (documentInfo && !('statusText' in documentInfo)) {
+          return of(documentInfo as DocumentInfo)
         } else {
           this.router.navigate(['/document'])
           return of(null)

@@ -47,7 +47,8 @@ namespace DocumentManagement.Api.Helpers
                     {
                         if (context.SecurityToken is JwtSecurityToken accessToken)
                         {
-                            var userName = accessToken.Claims.FirstOrDefault(a => a.Type == Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub)?.Value;
+                            var userName = accessToken.Claims.FirstOrDefault(a => a.Type == "sub")?.Value
+                                ?? accessToken.Claims.FirstOrDefault(a => a.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                             var email = accessToken.Claims.FirstOrDefault(a => a.Type == "Email")?.Value;
                             context.HttpContext.Items["Id"] = userName;
                             var userInfoToken = context.HttpContext.RequestServices.GetRequiredService<UserInfoToken>();
