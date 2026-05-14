@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable, of } from 'rxjs'
 import { take, mergeMap } from 'rxjs/operators'
 import { Reminder } from '@core/domain-classes/reminder'
@@ -7,7 +7,7 @@ import { ReminderService } from '../reminder.service'
 import { CommonService } from '@core/services/common.service'
 
 @Injectable()
-export class ReminderDetailResolverService implements Resolve<Reminder> {
+export class ReminderDetailResolverService  {
   constructor(
     private cs: CommonService,
     private router: Router

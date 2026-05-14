@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { CommonError } from '@core/error-handler/common-error'
 import { Observable, of } from 'rxjs'
 import { take, mergeMap } from 'rxjs/operators'
@@ -9,7 +9,7 @@ import { DocumentService } from '../document.service'
 @Injectable({
   providedIn: 'root',
 })
-export class DocumentManageResolver implements Resolve<DocumentInfo | CommonError | null> {
+export class DocumentManageResolver  {
   constructor(
     private documentService: DocumentService,
     private router: Router
