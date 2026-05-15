@@ -13,9 +13,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { DocumentService } from '../document.service'
 
 @Component({
-  selector: 'app-document-edit',
-  templateUrl: './document-edit.component.html',
-  styleUrls: ['./document-edit.component.scss'],
+    selector: 'app-document-edit',
+    templateUrl: './document-edit.component.html',
+    styleUrls: ['./document-edit.component.scss'],
+    standalone: false
 })
 export class DocumentEditComponent extends BaseComponent implements OnInit {
   document: DocumentInfo

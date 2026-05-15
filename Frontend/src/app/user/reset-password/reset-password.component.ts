@@ -8,9 +8,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { UserService } from '../user.service'
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css'],
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.css'],
+    standalone: false
 })
 export class ResetPasswordComponent extends BaseComponent implements OnInit {
   resetPasswordForm: UntypedFormGroup

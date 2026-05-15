@@ -9,9 +9,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { UserService } from '../user.service'
 
 @Component({
-  selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css'],
+    selector: 'app-change-password',
+    templateUrl: './change-password.component.html',
+    styleUrls: ['./change-password.component.css'],
+    standalone: false
 })
 export class ChangePasswordComponent extends BaseComponent implements OnInit {
   changePasswordForm: UntypedFormGroup

@@ -11,12 +11,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/document-management",
+            "outputPath": {
+              "base": "dist/document-management"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "allowedCommonJsDependencies": [
               "SubSink",
@@ -45,12 +48,11 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/mammoth/mammoth.browser.min.js"
             ],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -65,8 +67,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -90,10 +90,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "document-management:build:production"
+              "buildTarget": "document-management:build:production"
             },
             "development": {
-              "browserTarget": "document-management:build:development"
+              "buildTarget": "document-management:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -101,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "document-management:build"
+            "buildTarget": "document-management:build"
           }
         },
         "test": {

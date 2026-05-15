@@ -16,9 +16,10 @@ import { DocumentAuditTrialDataSource } from './document-audit-trail-datassource
 import { DocumentAuditTrailService } from './document-audit-trail.service'
 
 @Component({
-  selector: 'app-document-audit-trail',
-  templateUrl: './document-audit-trail.component.html',
-  styleUrls: ['./document-audit-trail.component.scss'],
+    selector: 'app-document-audit-trail',
+    templateUrl: './document-audit-trail.component.html',
+    styleUrls: ['./document-audit-trail.component.scss'],
+    standalone: false
 })
 export class DocumentAuditTrailComponent extends BaseComponent implements OnInit, AfterViewInit {
   dataSource: DocumentAuditTrialDataSource

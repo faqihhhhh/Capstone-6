@@ -8,9 +8,10 @@ import { ToastrService } from 'ngx-toastr'
 import { CommonError } from '@core/error-handler/common-error'
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent extends BaseComponent implements OnInit {
   loginFormGroup: UntypedFormGroup

@@ -15,9 +15,10 @@ import { MatCheckboxChange } from '@angular/material/checkbox'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'app-add-reminder',
-  templateUrl: './add-reminder.component.html',
-  styleUrls: ['./add-reminder.component.scss'],
+    selector: 'app-add-reminder',
+    templateUrl: './add-reminder.component.html',
+    styleUrls: ['./add-reminder.component.scss'],
+    standalone: false
 })
 export class AddReminderComponent extends BaseComponent implements OnInit {
   reminderFrequencies: ReminderFrequency[] = []

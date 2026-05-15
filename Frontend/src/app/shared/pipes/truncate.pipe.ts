@@ -2,7 +2,8 @@ import { Pipe } from '@angular/core'
 
 // tslint:disable-next-line:use-pipe-transform-interface
 @Pipe({
-  name: 'limitTo',
+    name: 'limitTo',
+    standalone: false
 })
 export class TruncatePipe {
   transform(value: string, args: string): string {

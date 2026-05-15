@@ -10,9 +10,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { DocumentPermissionService } from '../document-permission.service'
 
 @Component({
-  selector: 'app-manage-role-permission',
-  templateUrl: './manage-role-permission.component.html',
-  styleUrls: ['./manage-role-permission.component.scss'],
+    selector: 'app-manage-role-permission',
+    templateUrl: './manage-role-permission.component.html',
+    styleUrls: ['./manage-role-permission.component.scss'],
+    standalone: false
 })
 export class ManageRolePermissionComponent extends BaseComponent implements OnInit {
   selectedRoles: Role[] = []

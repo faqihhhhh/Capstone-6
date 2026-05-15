@@ -7,9 +7,10 @@ import { Role } from '@core/domain-classes/role'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
-  selector: 'app-manage-role-presentation',
-  templateUrl: './manage-role-presentation.component.html',
-  styleUrls: ['./manage-role-presentation.component.css'],
+    selector: 'app-manage-role-presentation',
+    templateUrl: './manage-role-presentation.component.html',
+    styleUrls: ['./manage-role-presentation.component.css'],
+    standalone: false
 })
 export class ManageRolePresentationComponent implements OnInit {
   @Input() screens: Screen[]

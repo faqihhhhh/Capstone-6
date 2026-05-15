@@ -11,9 +11,10 @@ import { LoginAuditDataSource } from '../login-audit-datasource'
 import { LoginAuditService } from '../login-audit.service'
 
 @Component({
-  selector: 'app-login-audit-list',
-  templateUrl: './login-audit-list.component.html',
-  styleUrls: ['./login-audit-list.component.scss'],
+    selector: 'app-login-audit-list',
+    templateUrl: './login-audit-list.component.html',
+    styleUrls: ['./login-audit-list.component.scss'],
+    standalone: false
 })
 export class LoginAuditListComponent extends BaseComponent implements OnInit, AfterViewInit {
   dataSource: LoginAuditDataSource

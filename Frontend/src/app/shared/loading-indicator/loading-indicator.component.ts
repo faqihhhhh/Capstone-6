@@ -4,9 +4,10 @@ import { debounce } from 'rxjs/operators'
 import { PendingInterceptorService } from './pending-interceptor.service'
 
 @Component({
-  selector: 'app-loading-indicator',
-  templateUrl: './loading-indicator.component.html',
-  styleUrls: ['./loading-indicator.component.scss'],
+    selector: 'app-loading-indicator',
+    templateUrl: './loading-indicator.component.html',
+    styleUrls: ['./loading-indicator.component.scss'],
+    standalone: false
 })
 export class LoadingIndicatorComponent implements OnInit, OnDestroy {
   public isSpinnerVisible: boolean

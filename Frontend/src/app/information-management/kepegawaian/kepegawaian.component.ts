@@ -25,9 +25,10 @@ import { CommonDialogService } from '@core/common-dialog/common-dialog.service'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'kepegawaian',
-  templateUrl: './kepegawaian.component.html',
-  styleUrls: ['./kepegawaian.component.scss'],
+    selector: 'kepegawaian',
+    templateUrl: './kepegawaian.component.html',
+    styleUrls: ['./kepegawaian.component.scss'],
+    standalone: false
 })
 export class KepegawaianComponent extends BaseComponent implements OnInit {
   dosens: DosenResponse[] = []

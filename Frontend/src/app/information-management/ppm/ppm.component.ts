@@ -26,9 +26,10 @@ import { TranslationService } from '@core/services/translation.service'
 
 //-----------------------------------------------------------------
 @Component({
-  selector: 'ppm',
-  templateUrl: './ppm.component.html',
-  styleUrls: ['./ppm.component.scss'],
+    selector: 'ppm',
+    templateUrl: './ppm.component.html',
+    styleUrls: ['./ppm.component.scss'],
+    standalone: false
 })
 export class PpmComponent extends BaseComponent implements OnInit {
   /*

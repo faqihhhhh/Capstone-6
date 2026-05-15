@@ -6,10 +6,11 @@ import { BaseComponent } from 'src/app/base.component'
 import { ManageOperationComponent } from '../manage-operation/manage-operation.component'
 
 @Component({
-  selector: 'app-operation-list-presentation',
-  templateUrl: './operation-list-presentation.component.html',
-  styleUrls: ['./operation-list-presentation.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-operation-list-presentation',
+    templateUrl: './operation-list-presentation.component.html',
+    styleUrls: ['./operation-list-presentation.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OperationListPresentationComponent extends BaseComponent implements OnInit {
   @Input() operations: Operation[]

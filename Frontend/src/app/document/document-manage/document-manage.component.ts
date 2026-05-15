@@ -12,9 +12,10 @@ import { CommonService } from '@core/services/common.service'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'app-document-manage',
-  templateUrl: './document-manage.component.html',
-  styleUrls: ['./document-manage.component.scss'],
+    selector: 'app-document-manage',
+    templateUrl: './document-manage.component.html',
+    styleUrls: ['./document-manage.component.scss'],
+    standalone: false
 })
 export class DocumentManageComponent extends BaseComponent implements OnInit {
   documentForm: UntypedFormGroup

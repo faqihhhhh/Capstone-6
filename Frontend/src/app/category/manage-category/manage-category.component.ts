@@ -5,9 +5,10 @@ import { CategoryService } from '@core/services/category.service'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-manage-category',
-  templateUrl: './manage-category.component.html',
-  styleUrls: ['./manage-category.component.css'],
+    selector: 'app-manage-category',
+    templateUrl: './manage-category.component.html',
+    styleUrls: ['./manage-category.component.css'],
+    standalone: false
 })
 export class ManageCategoryComponent extends BaseComponent implements OnChanges {
   isEdit: boolean = false

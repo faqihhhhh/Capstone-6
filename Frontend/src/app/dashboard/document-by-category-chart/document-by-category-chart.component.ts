@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { DashboradService } from '../dashboard.service'
 
 @Component({
-  selector: 'app-document-by-category-chart',
-  templateUrl: './document-by-category-chart.component.html',
-  styleUrls: ['./document-by-category-chart.component.scss'],
+    selector: 'app-document-by-category-chart',
+    templateUrl: './document-by-category-chart.component.html',
+    styleUrls: ['./document-by-category-chart.component.scss'],
+    standalone: false
 })
 export class DocumentByCategoryChartComponent implements OnInit {
   single: any[] = []

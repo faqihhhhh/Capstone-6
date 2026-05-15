@@ -9,9 +9,10 @@ import { ToastrService } from 'ngx-toastr'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-role-users',
-  templateUrl: './role-users.component.html',
-  styleUrls: ['./role-users.component.css'],
+    selector: 'app-role-users',
+    templateUrl: './role-users.component.html',
+    styleUrls: ['./role-users.component.css'],
+    standalone: false
 })
 export class RoleUsersComponent extends BaseComponent implements OnInit {
   roles: Role[]

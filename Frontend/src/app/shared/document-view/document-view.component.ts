@@ -12,9 +12,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { DocumentLibraryService } from '../../document-library/document-library.service'
 
 @Component({
-  selector: 'app-document-view',
-  templateUrl: './document-view.component.html',
-  styleUrls: ['./document-view.component.css'],
+    selector: 'app-document-view',
+    templateUrl: './document-view.component.html',
+    styleUrls: ['./document-view.component.css'],
+    standalone: false
 })
 export class DocumentViewComponent extends BaseComponent implements OnInit {
   constructor(

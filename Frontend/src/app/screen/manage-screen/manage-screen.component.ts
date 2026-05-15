@@ -5,9 +5,10 @@ import { ScreenService } from '@core/services/screen.service'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-manage-screen',
-  templateUrl: './manage-screen.component.html',
-  styleUrls: ['./manage-screen.component.css'],
+    selector: 'app-manage-screen',
+    templateUrl: './manage-screen.component.html',
+    styleUrls: ['./manage-screen.component.css'],
+    standalone: false
 })
 export class ManageScreenComponent extends BaseComponent implements OnChanges {
   isEdit: boolean = false

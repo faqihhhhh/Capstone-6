@@ -7,9 +7,10 @@ import { tap } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 
 @Component({
-  selector: 'app-screen-list',
-  templateUrl: './screen-list.component.html',
-  styleUrls: ['./screen-list.component.css'],
+    selector: 'app-screen-list',
+    templateUrl: './screen-list.component.html',
+    styleUrls: ['./screen-list.component.css'],
+    standalone: false
 })
 export class ScreenListComponent extends BaseComponent implements OnInit {
   screens$: Observable<Screen[]>

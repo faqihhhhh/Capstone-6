@@ -6,9 +6,10 @@ import { OverlayPanelRef } from '@shared/overlay-panel/overlay-panel-ref'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-audio-preview',
-  templateUrl: './audio-preview.component.html',
-  styleUrls: ['./audio-preview.component.scss'],
+    selector: 'app-audio-preview',
+    templateUrl: './audio-preview.component.html',
+    styleUrls: ['./audio-preview.component.scss'],
+    standalone: false
 })
 export class AudioPreviewComponent extends BaseComponent implements OnChanges {
   @ViewChild('playerEl', { static: true }) playerEl: ElementRef

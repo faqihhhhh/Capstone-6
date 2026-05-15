@@ -10,9 +10,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { NotificationService } from 'src/app/notification/notification.service'
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: false
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   @ViewChild('selectElem', { static: true }) el: ElementRef

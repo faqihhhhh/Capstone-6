@@ -8,9 +8,10 @@ import { delay } from 'rxjs/operators'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-image-preview',
-  templateUrl: './image-preview.component.html',
-  styleUrls: ['./image-preview.component.scss'],
+    selector: 'app-image-preview',
+    templateUrl: './image-preview.component.html',
+    styleUrls: ['./image-preview.component.scss'],
+    standalone: false
 })
 export class ImagePreviewComponent extends BaseComponent implements OnInit, OnChanges {
   imageUrl: SafeUrl

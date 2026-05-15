@@ -7,9 +7,10 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
-  selector: 'app-user-permission-presentation',
-  templateUrl: './user-permission-presentation.component.html',
-  styleUrls: ['./user-permission-presentation.component.css'],
+    selector: 'app-user-permission-presentation',
+    templateUrl: './user-permission-presentation.component.html',
+    styleUrls: ['./user-permission-presentation.component.css'],
+    standalone: false
 })
 export class UserPermissionPresentationComponent implements OnInit {
   @Input() screens: Screen[]

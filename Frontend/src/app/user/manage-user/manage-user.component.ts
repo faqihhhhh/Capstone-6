@@ -10,9 +10,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { UserService } from '../user.service'
 
 @Component({
-  selector: 'app-manage-user',
-  templateUrl: './manage-user.component.html',
-  styleUrls: ['./manage-user.component.css'],
+    selector: 'app-manage-user',
+    templateUrl: './manage-user.component.html',
+    styleUrls: ['./manage-user.component.css'],
+    standalone: false
 })
 export class ManageUserComponent extends BaseComponent implements OnInit {
   user: User

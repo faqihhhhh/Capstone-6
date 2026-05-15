@@ -19,9 +19,10 @@ import { DocumentService } from 'src/app/document/document.service'
 import { DocumentInfo } from '@core/domain-classes/document-info'
 
 @Component({
-  selector: 'app-notification-list',
-  templateUrl: './notification-list.component.html',
-  styleUrls: ['./notification-list.component.css'],
+    selector: 'app-notification-list',
+    templateUrl: './notification-list.component.html',
+    styleUrls: ['./notification-list.component.css'],
+    standalone: false
 })
 export class NotificationListComponent extends BaseComponent implements OnInit, AfterViewInit {
   dataSource: NotificationDataSource

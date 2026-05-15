@@ -6,9 +6,10 @@ import { forkJoin } from 'rxjs'
 import { DashboradService } from '../dashboard.service'
 
 @Component({
-  selector: 'app-calender-view',
-  templateUrl: './calender-view.component.html',
-  styleUrls: ['./calender-view.component.css'],
+    selector: 'app-calender-view',
+    templateUrl: './calender-view.component.html',
+    styleUrls: ['./calender-view.component.css'],
+    standalone: false
 })
 export class CalenderViewComponent implements OnInit {
   view: CalendarView = CalendarView.Month

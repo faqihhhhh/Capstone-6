@@ -22,9 +22,10 @@ import { CommonDialogService } from '@core/common-dialog/common-dialog.service'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'kemahasiswaan',
-  templateUrl: './kemahasiswaan.component.html',
-  styleUrls: ['./kemahasiswaan.component.scss'],
+    selector: 'kemahasiswaan',
+    templateUrl: './kemahasiswaan.component.html',
+    styleUrls: ['./kemahasiswaan.component.scss'],
+    standalone: false
 })
 export class KemahasiswaanComponent extends BaseComponent implements OnInit {
   prestasis: KemahasiswaanPrestasiData[] = []

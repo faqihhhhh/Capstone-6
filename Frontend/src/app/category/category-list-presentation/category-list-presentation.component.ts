@@ -17,17 +17,18 @@ import { BaseComponent } from 'src/app/base.component'
 import { ManageCategoryComponent } from '../manage-category/manage-category.component'
 
 @Component({
-  selector: 'app-category-list-presentation',
-  templateUrl: './category-list-presentation.component.html',
-  styleUrls: ['./category-list-presentation.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+    selector: 'app-category-list-presentation',
+    templateUrl: './category-list-presentation.component.html',
+    styleUrls: ['./category-list-presentation.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ],
+    standalone: false
 })
 export class CategoryListPresentationComponent extends BaseComponent implements OnInit {
   @Input() categories: Category[]

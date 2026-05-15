@@ -15,9 +15,10 @@ import { UserService } from '../user.service'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'app-user-permission',
-  templateUrl: './user-permission.component.html',
-  styleUrls: ['./user-permission.component.css'],
+    selector: 'app-user-permission',
+    templateUrl: './user-permission.component.html',
+    styleUrls: ['./user-permission.component.css'],
+    standalone: false
 })
 export class UserPermissionComponent extends BaseComponent implements OnInit {
   screenOperations$: Observable<ScreenOperation[]>

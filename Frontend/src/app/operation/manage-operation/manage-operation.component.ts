@@ -5,9 +5,10 @@ import { Operation } from '@core/domain-classes/operation'
 import { OperationService } from '@core/services/operation.service'
 
 @Component({
-  selector: 'app-manage-operation',
-  templateUrl: './manage-operation.component.html',
-  styleUrls: ['./manage-operation.component.css'],
+    selector: 'app-manage-operation',
+    templateUrl: './manage-operation.component.html',
+    styleUrls: ['./manage-operation.component.css'],
+    standalone: false
 })
 export class ManageOperationComponent extends BaseComponent implements OnChanges {
   isEdit: boolean = false

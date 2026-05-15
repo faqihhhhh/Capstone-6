@@ -2,8 +2,9 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core'
 import { SecurityService } from '../core/security/security.service'
 
 @Directive({
-  // tslint:disable-next-line: directive-selector
-  selector: '[hasClaim]',
+    // tslint:disable-next-line: directive-selector
+    selector: '[hasClaim]',
+    standalone: false
 })
 export class HasClaimDirective {
   @Input() set hasClaim(claimType: any) {
