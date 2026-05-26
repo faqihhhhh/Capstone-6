@@ -36,8 +36,19 @@ export class HttpRequestInterceptor implements HttpInterceptor {
               if (err.status === 401) {
                 this.router.navigate(['login'])
               }
-              if (err.error && err.error.length >= 0) {
-                this.toastrService.error(err.error[0])
+              if (err.error) {
+                if (Array.isArray(err.error) && err.error.length > 0) {
+                  this.toastrService.error(err.error[0])
+                } else if (typeof err.error === 'string') {
+                  if (err.error.length > 200 || err.error.includes('<html')) {
+                    console.error('Server Error:', err.error);
+                    this.toastrService.error('Terjadi kesalahan pada server (Internal Server Error). Silakan cek console.');
+                  } else {
+                    this.toastrService.error(err.error);
+                  }
+                } else if (err.error.messages && err.error.messages.length > 0) {
+                  this.toastrService.error(err.error.messages[0])
+                }
               }
             }
           }

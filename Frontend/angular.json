@@ -40,7 +40,8 @@
               "node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css",
               "src/assets/styles/main.scss",
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/@danielmoncada/angular-datetime-picker/assets/style/picker.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

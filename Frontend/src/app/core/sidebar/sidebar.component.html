@@ -194,6 +194,45 @@
                 <span class="nav-text">{{ 'LOGIN_AUDITS' | translate }}</span>
               </div>
             </li>
+            <li
+              *hasClaim="'role_view_roles'"
+              class="nav-item"
+              [routerLink]="['/screens']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-desktop"></i>
+                <span class="nav-text">{{ 'SCREENS' | translate }}</span>
+              </div>
+            </li>
+            <li
+              *hasClaim="'role_view_roles'"
+              class="nav-item"
+              [routerLink]="['/operations']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-cogs"></i>
+                <span class="nav-text">{{ 'OPERATIONS' | translate }}</span>
+              </div>
+            </li>
+            <li
+              *hasClaim="'role_view_roles'"
+              class="nav-item"
+              [routerLink]="['/screen-operation']"
+              [routerLinkActive]="['active', 'shadow']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div class="nav-item-hold">
+                <i class="nav-icon las la-network-wired"></i>
+                <span class="nav-text">{{ 'SCREEN_OPERATIONS' | translate }}</span>
+              </div>
+            </li>
           </ul>
         </li>
 
