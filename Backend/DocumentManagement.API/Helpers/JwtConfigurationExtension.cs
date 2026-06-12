@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System;
@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using DocumentManagement.Data;
 using DocumentManagement.Data.Dto;
+using Microsoft.Extensions.Logging;
+using DocumentManagement.API;
+using Microsoft.AspNetCore.Http;
 
 namespace DocumentManagement.Api.Helpers
 {
@@ -20,10 +23,10 @@ namespace DocumentManagement.Api.Helpers
             // Register Jwt as the Authentication service
             services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme = "JwtBearer";
-                options.DefaultChallengeScheme = "JwtBearer";
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer("JwtBearer", jwtBearerOptions =>
+            .AddJwtBearer(jwtBearerOptions =>
             {
                 jwtBearerOptions.TokenValidationParameters =
               new TokenValidationParameters
@@ -43,6 +46,19 @@ namespace DocumentManagement.Api.Helpers
               };
                 jwtBearerOptions.Events = new JwtBearerEvents
                 {
+                    OnAuthenticationFailed = context =>
+                    {
+                        var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Startup>>();
+                        logger.LogError($"Token validation failed: {context.Exception}");
+                        return Task.CompletedTask;
+                    },
+                    OnChallenge = async context =>
+                    {
+                        context.HandleResponse();
+                        context.Response.StatusCode = 401;
+                        context.Response.ContentType = "text/plain";
+                        await context.Response.WriteAsync($"Token challenge: {context.Error}, {context.ErrorDescription}, {context.AuthenticateFailure?.Message}");
+                    },
                     OnTokenValidated = context =>
                     {
                         if (context.SecurityToken is JwtSecurityToken accessToken)

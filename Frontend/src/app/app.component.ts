@@ -8,10 +8,10 @@ import { TranslateService } from '@ngx-translate/core'
 import { BaseComponent } from './base.component'
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    standalone: false
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  standalone: false
 })
 export class AppComponent extends BaseComponent implements OnInit {
   title = 'document-management'
@@ -33,20 +33,18 @@ export class AppComponent extends BaseComponent implements OnInit {
   setLanguage() {
     const currentLang = this.translationService.getSelectedLanguage()
     if (currentLang) {
-      this.sub$.sink = this.translationService.setLanguage(currentLang).subscribe(() => {})
+      this.sub$.sink = this.translationService.setLanguage(currentLang).subscribe(() => { })
     } else {
       const browserLang = this.translate.getBrowserLang()
       const lang = browserLang.match(/en|es|ar|ru|cn|ja|ko|fr/) ? browserLang : 'en'
-      this.sub$.sink = this.translationService.setLanguage(lang).subscribe(() => {})
+      this.sub$.sink = this.translationService.setLanguage(lang).subscribe(() => { })
     }
   }
 
   ngOnInit(): void {
-    this.signalrService.startConnection().then((resolve) => {
-      if (resolve) {
-        this.signalrService.handleMessage()
-        this.getAuthObj()
-      }
+    this.signalrService.startConnection().then(() => {
+      this.signalrService.handleMessage()
+      this.getAuthObj()
     })
   }
 

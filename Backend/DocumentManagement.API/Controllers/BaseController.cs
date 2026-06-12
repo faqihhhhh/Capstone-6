@@ -1,6 +1,7 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using DocumentManagement.Helper;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DocumentManagement.API.Controllers
 {
@@ -16,7 +17,7 @@ namespace DocumentManagement.API.Controllers
                     token = token.ToString().Replace("Bearer", "").Trim();
                     var handler = new JwtSecurityTokenHandler();
                     var tokeObject = handler.ReadToken(token) as JwtSecurityToken;
-                    return tokeObject.Subject;
+                    return tokeObject.Claims.FirstOrDefault(c => c.Type == "Email" || c.Type == "email")?.Value ?? tokeObject.Subject;
                 }
                 return "";
             }
