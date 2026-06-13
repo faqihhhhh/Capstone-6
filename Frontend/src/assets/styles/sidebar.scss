@@ -213,7 +213,7 @@
 }
 
 @media (min-width: 768px) {
-  ul.nav li:hover > ul.dropdown-menu {
+  ul.nav li.open-menu > ul.dropdown-menu {
     display: block;
     left: 100px !important;
     position: fixed !important;
@@ -222,6 +222,7 @@
     border: 0;
     border-radius: 0;
     width: 200px !important;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.05);
   }
   #navbar {
     text-align: center;
@@ -229,7 +230,7 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-  ul.nav li:hover > ul.dropdown-menu {
+  ul.nav li.open-menu > ul.dropdown-menu {
     display: block;
     left: 100px !important;
     position: fixed !important;
@@ -239,6 +240,7 @@
     border-radius: 0;
     width: 200px !important;
     transform: translate3d(0px, 0px, 0px) !important;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.05);
   }
   #navbar {
     text-align: center;

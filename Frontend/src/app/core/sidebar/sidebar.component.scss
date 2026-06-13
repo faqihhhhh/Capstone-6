@@ -8,18 +8,11 @@
 .mainmenu a,
 .mainmenu label {
   display: block;
-  // background-color: #fff;
   text-decoration: none;
   padding: 10px;
-  // color: #000;
   margin-bottom: 0;
   cursor: pointer;
 }
-
-// .mainmenu a:hover,
-// .mainmenu label:hover {
-//   background-color: #c5c5c5;
-// }
 
 /* hide the input */
 .mainmenu input {
@@ -49,24 +42,67 @@
   transition: all 0.5s ease-out;
 }
 
-.custom-dropdown-menu-dms {
-  max-height: 300px;
-  overflow-y: auto;
-  margin: 2px;
-}
-
-.custom-dropdown-menu-user {
-  max-height: 400px;
-  overflow-y: auto;
-  margin: 2px;
+/* Base Nav Item Modernization */
+.nav-item {
+  border-radius: 8px;
+  margin: 4px 8px;
+  transition: all 0.2s ease-in-out;
 }
 
 .nav-item:hover {
-  background-color: #c5c5c5;
-  color: white;
+  background-color: rgba(63, 81, 181, 0.1); /* Soft indigo */
+  color: #3f51b5;
+}
+
+/* Active State Polishing */
+.nav-item.active {
+  background-color: rgba(63, 81, 181, 0.15) !important;
+  color: #3f51b5 !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.1) !important;
+}
+
+/* Fix Dropdown Menus */
+.custom-dropdown-menu-dms,
+.custom-dropdown-menu-user {
+  max-height: 400px;
+  overflow-y: auto;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 8px;
+  /* Fix hover gap issue by pulling it slightly closer */
+  margin-left: 2px;
+}
+
+/* Fix for nested nav-items in dropdown */
+.dropdown-menu .nav-item {
+  margin: 2px 4px;
+}
+
+.dropdown-menu .nav-item:hover {
+  background-color: rgba(63, 81, 181, 0.08);
 }
 
 .dropdown-menu>li>.dropdown-header {
   text-align: center;
   font-size: 14px;
+  color: #888;
+}
+
+/* CSS trick to bridge the hover gap between parent and dropdown */
+.dropend .dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -15px; /* Bridge the gap */
+  width: 15px;
+  height: 100%;
+  background: transparent;
+}
+
+/* HIDE EMPTY "NO CONTENT" DROPDOWNS */
+/* If a dropend doesn't have any inner li.nav-item (due to hasClaim hiding them), completely hide it */
+.nav-item.dropend:not(:has(li.nav-item)) {
+  display: none !important;
 }
