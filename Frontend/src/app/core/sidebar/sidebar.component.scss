@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
 }
+
 .mainmenu a,
 .mainmenu label {
   display: block;
@@ -24,20 +25,24 @@
 .mainmenu input {
   display: none;
 }
+
 /* if a sibling checkbox is check show the menu */
-.mainmenu input:checked ~ .submenu {
+.mainmenu input:checked~.submenu {
   display: block;
   max-height: 200px;
 }
+
 .submenu a,
 .submenu label {
   background-color: #6c757d;
   color: #fff;
   border-bottom: 1px solid #969696;
 }
+
 .submenu a:hover {
   background-color: #666;
 }
+
 .submenu {
   overflow: hidden;
   max-height: 0;
@@ -51,7 +56,7 @@
 }
 
 .custom-dropdown-menu-user {
-  max-height: 230px;
+  max-height: 400px;
   overflow-y: auto;
   margin: 2px;
 }
@@ -61,7 +66,7 @@
   color: white;
 }
 
-.dropdown-menu > li > .dropdown-header {
+.dropdown-menu>li>.dropdown-header {
   text-align: center;
   font-size: 14px;
 }
