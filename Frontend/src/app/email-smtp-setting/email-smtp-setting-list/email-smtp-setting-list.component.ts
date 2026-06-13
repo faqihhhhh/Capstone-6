@@ -7,9 +7,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { EmailSmtpSettingService } from '../email-smtp-setting.service'
 
 @Component({
-  selector: 'app-email-smtp-setting-list',
-  templateUrl: './email-smtp-setting-list.component.html',
-  styleUrls: ['./email-smtp-setting-list.component.scss'],
+    selector: 'app-email-smtp-setting-list',
+    templateUrl: './email-smtp-setting-list.component.html',
+    styleUrls: ['./email-smtp-setting-list.component.scss'],
+    standalone: false
 })
 export class EmailSmtpSettingListComponent extends BaseComponent implements OnInit {
   emailSMTPSettings: EmailSMTPSetting[] = []

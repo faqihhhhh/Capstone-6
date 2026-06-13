@@ -15,9 +15,10 @@ import { ToastrService } from 'ngx-toastr'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'app-manage-role',
-  templateUrl: './manage-role.component.html',
-  styleUrls: ['./manage-role.component.css'],
+    selector: 'app-manage-role',
+    templateUrl: './manage-role.component.html',
+    styleUrls: ['./manage-role.component.css'],
+    standalone: false
 })
 export class ManageRoleComponent extends BaseComponent implements OnInit {
   screenOperations$: Observable<ScreenOperation[]>

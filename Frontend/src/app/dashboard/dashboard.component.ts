@@ -3,9 +3,10 @@ import { BaseComponent } from '../base.component'
 import { DashboradService } from './dashboard.service'
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
   totalAssignDocumentCount = 0

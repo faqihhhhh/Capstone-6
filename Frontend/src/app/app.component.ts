@@ -8,9 +8,10 @@ import { TranslateService } from '@ngx-translate/core'
 import { BaseComponent } from './base.component'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent extends BaseComponent implements OnInit {
   title = 'document-management'

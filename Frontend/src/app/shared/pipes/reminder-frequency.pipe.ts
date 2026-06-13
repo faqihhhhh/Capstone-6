@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { reminderFrequencies } from '@core/domain-classes/reminder-frequency'
 
 @Pipe({
-  name: 'frequency',
+    name: 'frequency',
+    standalone: false
 })
 export class ReminderFrequencyPipe implements PipeTransform {
   transform(value: any, ...args: any[]): any {

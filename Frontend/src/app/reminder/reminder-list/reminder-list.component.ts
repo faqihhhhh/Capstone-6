@@ -17,9 +17,10 @@ import { ReminderService } from '../reminder.service'
 import { ReminderDataSource } from './reminder-datasource'
 
 @Component({
-  selector: 'app-reminder-list',
-  templateUrl: './reminder-list.component.html',
-  styleUrls: ['./reminder-list.component.css'],
+    selector: 'app-reminder-list',
+    templateUrl: './reminder-list.component.html',
+    styleUrls: ['./reminder-list.component.css'],
+    standalone: false
 })
 export class ReminderListComponent extends BaseComponent implements OnInit {
   dataSource: ReminderDataSource

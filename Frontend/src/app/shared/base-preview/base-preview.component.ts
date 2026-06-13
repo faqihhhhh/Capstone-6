@@ -15,9 +15,10 @@ import { ToastrService } from 'ngx-toastr'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-base-preview',
-  templateUrl: './base-preview.component.html',
-  styleUrls: ['./base-preview.component.scss'],
+    selector: 'app-base-preview',
+    templateUrl: './base-preview.component.html',
+    styleUrls: ['./base-preview.component.scss'],
+    standalone: false
 })
 export class BasePreviewComponent extends BaseComponent implements OnInit {
   type = ''

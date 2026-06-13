@@ -12,9 +12,10 @@ import { ChangePasswordComponent } from '../change-password/change-password.comp
 import { UserService } from '../user.service'
 
 @Component({
-  selector: 'app-my-profile',
-  templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.css'],
+    selector: 'app-my-profile',
+    templateUrl: './my-profile.component.html',
+    styleUrls: ['./my-profile.component.css'],
+    standalone: false
 })
 export class MyProfileComponent extends BaseComponent implements OnInit {
   userForm: UntypedFormGroup

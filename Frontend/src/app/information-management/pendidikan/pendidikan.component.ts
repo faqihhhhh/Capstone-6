@@ -18,9 +18,10 @@ import { CommonDialogService } from '@core/common-dialog/common-dialog.service'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'pendidikan',
-  templateUrl: './pendidikan.component.html',
-  styleUrls: ['./pendidikan.component.scss'],
+    selector: 'pendidikan',
+    templateUrl: './pendidikan.component.html',
+    styleUrls: ['./pendidikan.component.scss'],
+    standalone: false
 })
 export class PendidikanComponent extends BaseComponent implements OnInit {
   kependidikans: PendidikanResponse[] = []

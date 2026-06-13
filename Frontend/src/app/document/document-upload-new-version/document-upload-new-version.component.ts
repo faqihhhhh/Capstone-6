@@ -12,9 +12,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { DocumentService } from '../document.service'
 
 @Component({
-  selector: 'app-document-upload-new-version',
-  templateUrl: './document-upload-new-version.component.html',
-  styleUrls: ['./document-upload-new-version.component.css'],
+    selector: 'app-document-upload-new-version',
+    templateUrl: './document-upload-new-version.component.html',
+    styleUrls: ['./document-upload-new-version.component.css'],
+    standalone: false
 })
 export class DocumentUploadNewVersionComponent extends BaseComponent implements OnInit {
   documentForm: UntypedFormGroup

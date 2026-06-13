@@ -21,9 +21,10 @@ import { CommonDialogService } from '@core/common-dialog/common-dialog.service'
 import { TranslationService } from '@core/services/translation.service'
 
 @Component({
-  selector: 'publikasi',
-  templateUrl: './publikasi.component.html',
-  styleUrls: ['./publikasi.component.scss'],
+    selector: 'publikasi',
+    templateUrl: './publikasi.component.html',
+    styleUrls: ['./publikasi.component.scss'],
+    standalone: false
 })
 export class PublikasiComponent extends BaseComponent implements OnInit {
   publikasis: GetPublikasiResponse[] = []

@@ -5,9 +5,10 @@ import { OverlayPanelRef } from '@shared/overlay-panel/overlay-panel-ref'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-text-preview',
-  templateUrl: './text-preview.component.html',
-  styleUrls: ['./text-preview.component.scss'],
+    selector: 'app-text-preview',
+    templateUrl: './text-preview.component.html',
+    styleUrls: ['./text-preview.component.scss'],
+    standalone: false
 })
 export class TextPreviewComponent extends BaseComponent implements OnChanges {
   textLines: string[] = []

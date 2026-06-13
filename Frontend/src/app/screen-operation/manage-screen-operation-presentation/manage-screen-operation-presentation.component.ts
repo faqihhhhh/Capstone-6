@@ -16,10 +16,11 @@ import { ScreenOperation } from '@core/domain-classes/screen-operation'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-manage-screen-operation-presentation',
-  templateUrl: './manage-screen-operation-presentation.component.html',
-  styleUrls: ['./manage-screen-operation-presentation.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-manage-screen-operation-presentation',
+    templateUrl: './manage-screen-operation-presentation.component.html',
+    styleUrls: ['./manage-screen-operation-presentation.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ManageScreenOperationPresentationComponent extends BaseComponent implements OnInit, OnChanges {
   @Input() screens: Screen[]

@@ -6,10 +6,11 @@ import { Screen } from '@core/domain-classes/screen'
 import { ManageScreenComponent } from '../manage-screen/manage-screen.component'
 
 @Component({
-  selector: 'app-screen-list-presentation',
-  templateUrl: './screen-list-presentation.component.html',
-  styleUrls: ['./screen-list-presentation.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-screen-list-presentation',
+    templateUrl: './screen-list-presentation.component.html',
+    styleUrls: ['./screen-list-presentation.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ScreenListPresentationComponent extends BaseComponent implements OnInit {
   @Input() screens: Screen[]

@@ -32,9 +32,10 @@ import { CommonService } from '@core/services/common.service'
 import { ToastrService } from 'ngx-toastr'
 
 @Component({
-  selector: 'app-document-library-list',
-  templateUrl: './document-library-list.component.html',
-  styleUrls: ['./document-library-list.component.scss'],
+    selector: 'app-document-library-list',
+    templateUrl: './document-library-list.component.html',
+    styleUrls: ['./document-library-list.component.scss'],
+    standalone: false
 })
 export class DocumentLibraryListComponent extends BaseComponent implements OnInit, AfterViewInit {
   dataSource: DocumentLibraryDataSource

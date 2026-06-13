@@ -11,9 +11,10 @@ import * as FileSaver from 'file-saver'
 import * as XLSX from 'xlsx'
 
 @Component({
-  selector: 'penunjang',
-  templateUrl: './penunjang.component.html',
-  styleUrls: ['./penunjang.component.scss'],
+    selector: 'penunjang',
+    templateUrl: './penunjang.component.html',
+    styleUrls: ['./penunjang.component.scss'],
+    standalone: false
 })
 export class PenunjangComponent extends BaseComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<any>()

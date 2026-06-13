@@ -19,10 +19,11 @@ import { BaseComponent } from 'src/app/base.component'
 import { modifiedDropdownCategories } from 'src/app/information-management/constant'
 
 @Component({
-  selector: 'app-document-manage-presentation',
-  templateUrl: './document-manage-presentation.component.html',
-  styleUrls: ['./document-manage-presentation.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-document-manage-presentation',
+    templateUrl: './document-manage-presentation.component.html',
+    styleUrls: ['./document-manage-presentation.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DocumentManagePresentationComponent extends BaseComponent implements OnInit {
   document: DocumentInfo

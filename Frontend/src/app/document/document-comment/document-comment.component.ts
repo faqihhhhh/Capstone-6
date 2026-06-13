@@ -8,9 +8,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { DocumentCommentService } from './document-comment.service'
 
 @Component({
-  selector: 'app-document-comment',
-  templateUrl: './document-comment.component.html',
-  styleUrls: ['./document-comment.component.css'],
+    selector: 'app-document-comment',
+    templateUrl: './document-comment.component.html',
+    styleUrls: ['./document-comment.component.css'],
+    standalone: false
 })
 export class DocumentCommentComponent extends BaseComponent implements OnInit {
   commentForm: UntypedFormGroup

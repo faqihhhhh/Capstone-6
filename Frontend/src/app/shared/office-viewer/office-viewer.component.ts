@@ -16,9 +16,10 @@ import { OverlayPanelRef } from '@shared/overlay-panel/overlay-panel-ref'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-office-viewer',
-  templateUrl: './office-viewer.component.html',
-  styleUrls: ['./office-viewer.component.scss'],
+    selector: 'app-office-viewer',
+    templateUrl: './office-viewer.component.html',
+    styleUrls: ['./office-viewer.component.scss'],
+    standalone: false
 })
 export class OfficeViewerComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('iframe') iframe: ElementRef<HTMLIFrameElement>

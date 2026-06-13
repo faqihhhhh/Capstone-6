@@ -9,9 +9,10 @@ import { OperationService } from '@core/services/operation.service'
 import { ScreenOperationService } from '@core/services/screen-operation.service'
 
 @Component({
-  selector: 'app-manage-screen-operation',
-  templateUrl: './manage-screen-operation.component.html',
-  styleUrls: ['./manage-screen-operation.component.css'],
+    selector: 'app-manage-screen-operation',
+    templateUrl: './manage-screen-operation.component.html',
+    styleUrls: ['./manage-screen-operation.component.css'],
+    standalone: false
 })
 export class ManageScreenOperationComponent implements OnInit {
   screenOperations$: Observable<ScreenOperation[]>

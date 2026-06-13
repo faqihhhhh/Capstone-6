@@ -18,8 +18,9 @@ import { BaseComponent } from 'src/app/base.component'
 import { ReminderService } from 'src/app/reminder/reminder.service'
 
 @Component({
-  templateUrl: './document-reminder.component.html',
-  styleUrls: ['./document-reminder.component.scss'],
+    templateUrl: './document-reminder.component.html',
+    styleUrls: ['./document-reminder.component.scss'],
+    standalone: false
 })
 export class DocumentReminderComponent extends BaseComponent implements OnInit {
   reminderFrequencies: ReminderFrequency[] = []

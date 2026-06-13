@@ -16,9 +16,10 @@ import { DocumentService } from '../../document.service'
 import { DocumentPermissionService } from '../document-permission.service'
 
 @Component({
-  selector: 'app-document-permission-multiple',
-  templateUrl: './document-permission-multiple.component.html',
-  styleUrls: ['./document-permission-multiple.component.scss'],
+    selector: 'app-document-permission-multiple',
+    templateUrl: './document-permission-multiple.component.html',
+    styleUrls: ['./document-permission-multiple.component.scss'],
+    standalone: false
 })
 export class DocumentPermissionMultipleComponent extends BaseComponent implements OnInit {
   documentPermissions: DocumentPermission[] = []

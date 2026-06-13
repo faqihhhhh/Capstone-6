@@ -4,9 +4,10 @@ import { AudioPreviewComponent } from '@shared/audio-preview/audio-preview.compo
 import { OverlayPanelRef } from '@shared/overlay-panel/overlay-panel-ref'
 
 @Component({
-  selector: 'app-video-preview',
-  templateUrl: './video-preview.component.html',
-  styleUrls: ['./video-preview.component.scss'],
+    selector: 'app-video-preview',
+    templateUrl: './video-preview.component.html',
+    styleUrls: ['./video-preview.component.scss'],
+    standalone: false
 })
 export class VideoPreviewComponent extends AudioPreviewComponent implements OnChanges {
   constructor(

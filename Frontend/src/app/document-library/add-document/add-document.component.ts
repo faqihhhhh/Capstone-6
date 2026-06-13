@@ -16,9 +16,10 @@ import { ToastrService } from 'ngx-toastr'
 import { BaseComponent } from 'src/app/base.component'
 
 @Component({
-  selector: 'app-add-document',
-  templateUrl: './add-document.component.html',
-  styleUrls: ['./add-document.component.css'],
+    selector: 'app-add-document',
+    templateUrl: './add-document.component.html',
+    styleUrls: ['./add-document.component.css'],
+    standalone: false
 })
 export class AddDocumentComponent extends BaseComponent implements OnInit {
   document: DocumentInfo

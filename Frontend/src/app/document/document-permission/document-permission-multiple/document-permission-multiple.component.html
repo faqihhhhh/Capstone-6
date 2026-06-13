@@ -19,13 +19,13 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <mat-chip-list>
-        <mat-chip
+      <mat-chip-listbox>
+        <mat-chip-option
           *ngFor="let document of documents"
           color="primary"
-          >{{ document.name }}</mat-chip
+          >{{ document.name }}</mat-chip-option
         >
-      </mat-chip-list>
+      </mat-chip-listbox>
     </div>
   </div>
   <div

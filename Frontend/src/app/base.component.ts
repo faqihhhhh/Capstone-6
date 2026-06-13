@@ -2,8 +2,9 @@ import { Component, OnDestroy } from '@angular/core'
 import { SubSink } from 'subsink'
 
 @Component({
-  selector: 'app-base',
-  template: ``,
+    selector: 'app-base',
+    template: ``,
+    standalone: false
 })
 export class BaseComponent implements OnDestroy {
   sub$: SubSink

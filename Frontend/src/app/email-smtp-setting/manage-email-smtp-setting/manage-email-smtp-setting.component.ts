@@ -8,9 +8,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { EmailSmtpSettingService } from '../email-smtp-setting.service'
 
 @Component({
-  selector: 'app-manage-email-smtp-setting',
-  templateUrl: './manage-email-smtp-setting.component.html',
-  styleUrls: ['./manage-email-smtp-setting.component.scss'],
+    selector: 'app-manage-email-smtp-setting',
+    templateUrl: './manage-email-smtp-setting.component.html',
+    styleUrls: ['./manage-email-smtp-setting.component.scss'],
+    standalone: false
 })
 export class ManageEmailSmtpSettingComponent extends BaseComponent implements OnInit {
   isEditMode: boolean = false

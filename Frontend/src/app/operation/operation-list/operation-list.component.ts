@@ -7,9 +7,10 @@ import { tap } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 
 @Component({
-  selector: 'app-operation-list',
-  templateUrl: './operation-list.component.html',
-  styleUrls: ['./operation-list.component.css'],
+    selector: 'app-operation-list',
+    templateUrl: './operation-list.component.html',
+    styleUrls: ['./operation-list.component.css'],
+    standalone: false
 })
 export class OperationListComponent extends BaseComponent implements OnInit {
   operations$: Observable<Operation[]>

@@ -16,9 +16,10 @@ import { BaseComponent } from 'src/app/base.component'
 import { DocumentService } from '../document.service'
 
 @Component({
-  selector: 'app-document-version-history',
-  templateUrl: './document-version-history.component.html',
-  styleUrls: ['./document-version-history.component.css'],
+    selector: 'app-document-version-history',
+    templateUrl: './document-version-history.component.html',
+    styleUrls: ['./document-version-history.component.css'],
+    standalone: false
 })
 export class DocumentVersionHistoryComponent extends BaseComponent implements OnInit {
   documentVersions: DocumentVersion[] = []

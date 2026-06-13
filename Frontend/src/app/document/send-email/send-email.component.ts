@@ -13,9 +13,10 @@ import { EmailSendService } from './email-send.service'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 @Component({
-  selector: 'app-send-email',
-  templateUrl: './send-email.component.html',
-  styleUrls: ['./send-email.component.scss'],
+    selector: 'app-send-email',
+    templateUrl: './send-email.component.html',
+    styleUrls: ['./send-email.component.scss'],
+    standalone: false
 })
 export class SendEmailComponent extends BaseComponent implements OnInit {
   emailForm: UntypedFormGroup

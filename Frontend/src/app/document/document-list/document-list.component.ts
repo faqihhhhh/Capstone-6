@@ -36,9 +36,10 @@ import { SendEmailComponent } from '../send-email/send-email.component'
 import { DocumentDataSource } from './document-datasource'
 
 @Component({
-  selector: 'app-document-list',
-  templateUrl: './document-list.component.html',
-  styleUrls: ['./document-list.component.scss'],
+    selector: 'app-document-list',
+    templateUrl: './document-list.component.html',
+    styleUrls: ['./document-list.component.scss'],
+    standalone: false
 })
 export class DocumentListComponent extends BaseComponent implements OnInit, AfterViewInit {
   dataSource: DocumentDataSource

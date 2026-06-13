@@ -1,19 +1,11 @@
 import { Injectable } from '@angular/core'
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
-  CanActivateChild,
-  CanLoad,
-  Route,
-} from '@angular/router'
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { Observable } from 'rxjs'
 import { SecurityService } from './security.service'
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+export class AuthGuard  {
   constructor(
     private securityService: SecurityService,
     private router: Router,
