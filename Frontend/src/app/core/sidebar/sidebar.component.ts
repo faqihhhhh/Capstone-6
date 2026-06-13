@@ -8,15 +8,22 @@ import { Router } from '@angular/router'
     standalone: false
 })
 export class SidebarComponent implements OnInit {
+  activeMenu: string = '';
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  toggleMenu(menuName: string) {
+    this.activeMenu = this.activeMenu === menuName ? '' : menuName;
+  }
+
   addClass(event): void {
-    event.target.className += 'showMenu'
+    event.target.className += ' showMenu'
   }
 
   removeClass(event): void {
-    event.target.className = event.target.className.replace('removeMenu', '')
+    event.target.className = event.target.className.replace('showMenu', '')
   }
   onActiveUrl() {
     if (

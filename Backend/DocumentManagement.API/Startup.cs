@@ -105,7 +105,12 @@ namespace DocumentManagement.API
                     });
             });
 
-            services.AddSignalR();
+            services.AddSignalR()
+                .AddJsonProtocol(options =>
+                {
+                    options.PayloadSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+                    options.PayloadSerializerOptions.PropertyNameCaseInsensitive = true;
+                });
             services.Configure<IISServerOptions>(options =>
             {
                 options.AutomaticAuthentication = false;
@@ -214,10 +219,10 @@ namespace DocumentManagement.API
             });
             app.UseStaticFiles();
 
+            app.UseRouting();
             app.UseCors("ExposeResponseHeaders");
             //app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseRouting();
             app.UseAuthorization();
             app.UseResponseCompression();
 

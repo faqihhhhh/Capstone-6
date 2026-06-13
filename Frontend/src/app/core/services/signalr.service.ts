@@ -25,7 +25,7 @@ export class SignalrService {
     private clonerService: ClonerService,
     private toastrService: ToastrService,
     private securityService: SecurityService
-  ) {}
+  ) { }
 
   public startConnection(): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ export class SignalrService {
   }
 
   handleMessage = () => {
-    this.hubConnection.on('userLeft', (id: string) => {})
+    this.hubConnection.on('userLeft', (id: string) => { })
 
     this.hubConnection.on('sendNotification', (userId: string) => {
       this._userNotification$.next(userId)

@@ -2,8 +2,8 @@
   <div class="main-menu-inner">
     <div class="menu-body">
       <ul class="nav mainmenu">
-        <li class="nav-item dropend">
-          <div class="nav-item-hold">
+        <li class="nav-item dropend" [class.open-menu]="activeMenu === 'dms'">
+          <div class="nav-item-hold" (click)="toggleMenu('dms')">
             <i class="nav-icon las la-database"></i>
             <span class="nav-text dropdown-toggle">DMS</span>
           </div>
@@ -62,8 +62,8 @@
           </ul>
         </li>
 
-        <li class="nav-item dropend">
-          <div class="nav-item-hold">
+        <li class="nav-item dropend" [class.open-menu]="activeMenu === 'info'">
+          <div class="nav-item-hold" (click)="toggleMenu('info')">
             <i class="nav-icon las la-user"></i>
             <span class="nav-text dropdown-toggle">Information</span>
           </div>
@@ -136,8 +136,8 @@
           </ul>
         </li>
 
-        <li class="nav-item dropend">
-          <div class="nav-item-hold">
+        <li class="nav-item dropend" [class.open-menu]="activeMenu === 'user_config'">
+          <div class="nav-item-hold" (click)="toggleMenu('user_config')">
             <i class="nav-icon las la-user"></i>
             <span class="nav-text dropdown-toggle">User Config</span>
           </div>

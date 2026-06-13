@@ -1,4 +1,4 @@
-﻿using DocumentManagement.Data;
+using DocumentManagement.Data;
 using DocumentManagement.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -375,12 +375,14 @@ namespace DocumentManagement.Domain
             {
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
                 {
-                    if (entry.Entity.Jenis_Pegawai == JenisP.Dosen && !(entry.Entity is Dosen))
+                    if (entry.Entity.Jenis_Pegawai == JenisP.Dosen && entry.Entity.Dosen == null)
                     {
+                        // Note: EF might not populate navigation property in all cases during SaveChanges if only FK is set.
+                        // For a simple validation, this is much better than `is Dosen` which is always false for Pegawai.
                         throw new InvalidOperationException("Pegawai dengan Jenis_Pegawai 'Dosen' harus memiliki relasi dengan entitas Dosen.");
                     }
 
-                    if (entry.Entity.Jenis_Pegawai == JenisP.Tendik && !(entry.Entity is Tendik))
+                    if (entry.Entity.Jenis_Pegawai == JenisP.Tendik && entry.Entity.Tendik == null)
                     {
                         throw new InvalidOperationException("Pegawai dengan Jenis_Pegawai 'Tendik' harus memiliki relasi dengan entitas Tendik.");
                     }

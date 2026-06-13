@@ -10,6 +10,7 @@ services:
       - sqlserver
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
+      connectionStrings__DocumentDbConnectionString: "Server=sqlserver,1433;Database=idsESLDatabase;User ID=sa;Password=IDS3511p8;Encrypt=True;TrustServerCertificate=True;"
     networks:
       - app_network
     restart: on-failure

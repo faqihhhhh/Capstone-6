@@ -43,6 +43,9 @@ try
         var context = serviceScope.ServiceProvider.GetRequiredService<DocumentContext>();
         // untuk variabel context dimana scopednya adalah objek DocumentContext akan digunakan untuk services migrate Database
         context.Database.Migrate();
+        
+        // Memanggil seeder data dummy
+        DbInitializer.Initialize(context);
     } // Scope akand dihancurkan di sini dan objek-objeknya akan dihapus
 }
 catch (System.Exception)
